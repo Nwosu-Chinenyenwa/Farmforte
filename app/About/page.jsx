@@ -456,7 +456,6 @@ export default function page() {
           ))}
         </Swiper>
 
-        {/* Tailwind custom arrows */}
         <style jsx global>{`
           .swiper-button-next,
           .swiper-button-prev {
