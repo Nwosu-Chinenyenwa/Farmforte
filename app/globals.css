@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import "tailwindcss";
+/* font */
+body {
+  font-family: "Rubik", sans-serif;
+  overflow-x: hidden;
+}
+
+
+
+.rajdhani-light,form{
+  font-family: "Rajdhani", sans-serif;}
+
+  .inter{
+      font-family: "Inter", sans-serif;
+  }
+
+  .simpleBorder{
+    border-top: 1px solid rgba(0, 0, 0, 0.067);
+  }
+  
+  .order{
+        box-shadow: 0px 5px 28.5px 1.5px rgba(149, 152, 200, 0.2);
+  }
+
+  .aside{
+    border-right: 1px solid #dfeaf2;
+  }
+
+/* loader */
+/* From Uiverse.io by NlghtM4re */ 
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transform-style: preserve-3d;
+  transform: rotateX(-20deg) rotateY(30deg);
+  animation: treeAnimate 5s linear infinite;
+}
+
+@keyframes treeAnimate {
+  0% {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
+
+  100% {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+}
+
+.tree div {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: translateY(calc(25px * var(--x))) translateZ(0px);
+}
+
+.tree div.branch span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #69c069, #77dd77);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  border-bottom: 5px solid #00000019;
+  transform-origin: bottom;
+  transform: rotateY(calc(90deg * var(--i))) rotateX(30deg) translateZ(28.5px);
+}
+
+.tree div.stem span {
+  position: absolute;
+  top: 110px;
+ /* updated top value */
+  left: calc(50% - 7.5px);
+  width: 15px;
+  height: 50%;
+  background: linear-gradient(90deg, #bb4622, #df7214);
+  border-bottom: 5px solid #00000019;
+  transform-origin: bottom;
+  transform: rotateY(calc(90deg * var(--i))) translateZ(7.5px);
+}
+
+.shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  filter: blur(20px);
+  transform-style: preserve-3d;
+  transform: rotateX(90deg) translateZ(-65px);
+}
+
+
+.leave {
+animation: 2s leave infinite;
+transition: 1s;
+animation-duration: 3s;
+}
+
+
+.x{
+animation: 2s x infinite;
+transition: 1s;
+animation-duration: 5s;
+}
+
+@keyframes leave {
+  from{
+     scale:1;
+    opacity: 0.5;
+  }
+  to{
+     scale: -1;
+    opacity: 2;
+  }
+}
+
+@keyframes x {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-50px); }  
+  100% { transform: translateX(0); } 
+}
+
+
+.shake-btn {
+  animation: shake 1s infinite;
+  animation-duration: 7s;
+  transition: 1s;
+}
+
+@keyframes shake {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(-10deg); }
+  30%  { transform: rotate(10deg); }
+  40%  { transform: rotate(10deg); scale: 1.5;}
+  45%  { transform: rotate(-10deg); }
+  60%  { transform: rotate(10deg); }
+  75%  { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg)}
+}
+
+
+.nav-hero{
+  animation: 10s slide infinite;
+  background-image: url(../public/img/bg-1.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition:1s;
+  background-size: cover;
+}
+
+
+@keyframes slide {
+  0%   {  background-image: url(../public/img/bg-2.jpg);}
+  20%   {  background-image: url(../public/img/1.jpg);}
+  30%   {  background-image: url(../public/img/2.jpg);}
+  40%   {  background-image: url(../public/img/3.jpg);}
+  50%   {  background-image: url(../public/img/4.jpg);}
+  60%   {  background-image: url(../public/img/5.jpg);}
+  70%   {  background-image: url(../public/img/6.jpg);}
+  80%   {  background-image: url(../public/img/7.jpg);}
+  90%   {  background-image: url(../public/img/bg-3.jpg);}
+  100%   {  background-image: url(../public/img/bg-1.jpg);}
+}
+
+
+@keyframes fade {
+  0%, 100% { opacity: 0 }
+  10%, 30% { opacity: 1 }
+  40%, 90% { opacity: 0 }
+}
+
+
+.animate-fade {
+  animation: fade 6s infinite;
+}
+
+/* Custom delay classes */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.border{
+  border-right: rgba(139, 119, 5, 0.466) 1.5px solid;
+  border-bottom: none;
+  border-top: none;
+  border-left:none;
+}
+
+.nav-border{
+  border-bottom: rgba(139, 119, 5, 0.466) 1.5px solid;
+}
+
+
+.link{
+  border-right: #8b770577 1.5px solid;
+}
+.link1{
+  border-left: rgba(139, 119, 5, 0.466) 1.5px solid;
+}
+
+.transition{
+  transition: 0.5s;
+}
+
+
+.slideIn{
+  animation: 0.5s slidein;
+}
+
+@keyframes slidein {
+  from{
+   transform: translateX(100px);
+   opacity: 1;
+  }
+  to{
+    transform: translateX(0px);
+   opacity: 5;
+  }
+}
+
+
+
+/* mode */
+/* From Uiverse.io by Shoh2008 */ 
+.checkbox-wrapper-5 .check {
+  --size: 40px;
+  position: relative;
+  background: linear-gradient(90deg, yellowgreen, green);
+  line-height: 0;
+  perspective: 400px;
+  font-size: var(--size);
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"],
+  .checkbox-wrapper-5 .check label,
+  .checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after,
+  .checkbox-wrapper-5 .check {
+  appearance: none;
+  display: inline-block;
+  border-radius: var(--size);
+  border: 0;
+  transition: .35s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.checkbox-wrapper-5 .check label {
+  width: calc(2.2 * var(--size));
+  height: var(--size);
+  background: #d7d7d7;
+  overflow: hidden;
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"] {
+  position: absolute;
+  z-index: 1;
+  width: calc(.8 * var(--size));
+  height: calc(.8 * var(--size));
+  top: calc(.1 * var(--size));
+  left: calc(.1 * var(--size));
+  background: linear-gradient(45deg, #dedede, #ffffff);
+  box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+  outline: none;
+  margin: 0;
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked {
+  left: calc(1.3 * var(--size));
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label {
+  background: transparent;
+}
+
+.checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after {
+  content: "· ·";
+  position: absolute;
+  overflow: hidden;
+  left: calc(.15 * var(--size));
+  top: calc(.5 * var(--size));
+  height: var(--size);
+  letter-spacing: calc(-0.04 * var(--size));
+  color: #9b9b9b;
+  font-family: "Times New Roman", serif;
+  z-index: 2;
+  font-size: calc(.6 * var(--size));
+  border-radius: 0;
+  transform-origin: 0 0 calc(-0.5 * var(--size));
+  backface-visibility: hidden;
+}
+
+.checkbox-wrapper-5 .check label::after {
+  content: "●";
+  top: calc(.65 * var(--size));
+  left: calc(.2 * var(--size));
+  height: calc(.1 * var(--size));
+  width: calc(.35 * var(--size));
+  font-size: calc(.2 * var(--size));
+  transform-origin: 0 0 calc(-0.4 * var(--size));
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::before,
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+  left: calc(1.55 * var(--size));
+  top: calc(.4 * var(--size));
+  line-height: calc(.1 * var(--size));
+  transform: rotateY(360deg);
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+  height: calc(.16 * var(--size));
+  top: calc(.55 * var(--size));
+  left: calc(1.6 * var(--size));
+  font-size: calc(.6 * var(--size));
+  line-height: 0;
+}
+
+.fun-facts-content-area {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+
+.slideMenu{
+  animation: 1s slidemenu ;
+}
+
+@keyframes slidemenu{
+  from{
+   transform: translateY(-100px);
+  }
+  to{
+    transform: translateY(0px);
+  }
+}
+
+
+.tab_content  {
+    padding: 30px 50px;
+    border-radius: 5px;
+    border: 1px dashed #209e2e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    transition: 0.6s;
+    background-color: #d2ecd5;
+}
+
+.slideDown{
+  animation: 0.5s slidedown ;
+  transition: 0.5s;
+}
+
+@keyframes slidedown{
+  from{
+   transform: translateY(100px);
+  }
+  to{
+    transform: translateY(0px);
+  }
+}
+
+.faq{
+  animation: 0.5s faq;
+  transition: 0.5s;
+}
+
+@keyframes faq{
+  from{
+   transform: translateY(10px);
+  }
+  to{
+    transform: translateY(0px);
+  }
+}
+
+
+@keyframes slide-x {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-10%); } /* move left */
+  100% { transform: translateX(0); }   /* back to start */
+}
+
+.animate-slide-x {
+  animation: slide-x 10s ease-in-out infinite;
+}
+
+@keyframes resslide-x {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-200%); } /* move left */
+  100% { transform: translateX(0); }   /* back to start */
+}
+
+.resanimate-slide-x {
+  animation: resslide-x 10s ease-in-out infinite;
+}
+
+.faq{
+  background-image: url(../public/asset/faq-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.agree{
+  background-image: url(../public/asset/agree.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.Categories{
+    background-image: url(../public/asset/cultivation-bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.pagetitle{
+    background-image: url(../public/img/page-title-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cutivate-bg{
+      background-image: url(../public/asset/cultivation-white.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+footer{
+      background-image: url(../public/asset/footer-bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+.google{
+  max-width: 320px;
+  display: flex;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 0.5rem;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all .6s ease;
+}
+
+.google svg {
+  height: 24px;
+}
+
+.google:hover {
+  transform: scale(1.02);
+}
+
+
+/* From Uiverse.io by dovatgabriel */ 
+.newtons-cradle {
+ --uib-size: 50px;
+ --uib-speed: 1.2s;
+ --uib-color: #209e2e;
+ position: relative;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: var(--uib-size);
+ height: var(--uib-size);
+}
+
+.newtons-cradle__dot {
+ position: relative;
+ display: flex;
+ align-items: center;
+ height: 100%;
+ width: 25%;
+ transform-origin: center top;
+}
+
+.newtons-cradle__dot::after {
+ content: '';
+ display: block;
+ width: 100%;
+ height: 25%;
+ border-radius: 50%;
+ background-color: #156c21;
+}
+
+.newtons-cradle__dot:first-child {
+ animation: swing var(--uib-speed) linear infinite;
+}
+
+.newtons-cradle__dot:last-child {
+ animation: swing2 var(--uib-speed) linear infinite;
+}
+
+@keyframes swing {
+ 0% {
+  transform: rotate(0deg);
+  animation-timing-function: ease-out;
+ }
+
+ 25% {
+  transform: rotate(70deg);
+  animation-timing-function: ease-in;
+ }
+
+ 50% {
+  transform: rotate(0deg);
+  animation-timing-function: linear;
+ }
+}
+
+@keyframes swing2 {
+ 0% {
+  transform: rotate(0deg);
+  animation-timing-function: linear;
+ }
+
+ 50% {
+  transform: rotate(0deg);
+  animation-timing-function: ease-out;
+ }
+
+ 75% {
+  transform: rotate(-70deg);
+  animation-timing-function: ease-in;
+ }
+}
+
+
+/* .img{
+  mix-blend-mode: multiply;
+  background: transparent;
+} */
