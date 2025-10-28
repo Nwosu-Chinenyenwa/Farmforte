@@ -10,11 +10,9 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function Contact() {
   const [status, setStatus] = useState("");
-  const [load, setload] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setload(true)
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
@@ -30,7 +28,6 @@ export default function Contact() {
       e.target.reset();
     } else {
       toast.error("Failed to send message. Please try again.");
-      setload(false)
 
     }
   };
@@ -153,7 +150,7 @@ export default function Contact() {
                   type="submit"
                   className="bg-green-600 cursor-pointer hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full"
                 >
-                  {load ? "Sending...." : "Send Message"}
+                  Send Message
                 </button>
               </div>
             </form>
