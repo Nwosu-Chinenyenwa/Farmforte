@@ -1,34 +1,14 @@
-import { createServerClient } from "@supabase/ssr";
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
-
-export const updateSession = async (request) => {
-  let supabaseResponse = NextResponse.next({
+export async function updateSession(request) {
+  let response = NextResponse.next({
     request: {
       headers: request.headers,
     },
   });
 
-  const supabase = createServerClient(supabaseUrl, supabaseKey, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll();
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          request.cookies.set(name, value);
-        });
-
-        supabaseResponse = NextResponse.next({ request });
-
-        cookiesToSet.forEach(({ name, value, options }) => {
-          supabaseResponse.cookies.set(name, value, options);
-        });
-      },
-    },
-  });
+  const supabase = createMiddlewareClient({ req: request, res: response });
 
   const {
     data: { user },
@@ -62,24 +42,18 @@ export const updateSession = async (request) => {
     }
   }
 
-  if (pathname.startsWith("/admin") && !isAdmin) {
-    return NextResponse.redirect(new URL("/Login", request.url));
-  }
-  if (pathname.startsWith("/Accounts") && !isAdmin) {
-    return NextResponse.redirect(new URL("/Login", request.url));
-  }
-  if (pathname.startsWith("/AddProducts") && !isAdmin) {
-    return NextResponse.redirect(new URL("/Login", request.url));
-  }
-  if (pathname.startsWith("/AdminProfile") && !isAdmin) {
-    return NextResponse.redirect(new URL("/Login", request.url));
-  }
-  if (pathname.startsWith("/AdminSetting") && !isAdmin) {
-    return NextResponse.redirect(new URL("/Login", request.url));
-  }
-  if (pathname.startsWith("/Transactions") && !isAdmin) {
+  const adminPages = [
+    "/admin",
+    "/Accounts",
+    "/AddProducts",
+    "/AdminProfile",
+    "/AdminSetting",
+    "/Transactions",
+  ];
+
+  if (adminPages.some((page) => pathname.startsWith(page)) && !isAdmin) {
     return NextResponse.redirect(new URL("/Login", request.url));
   }
 
-  return supabaseResponse;
-};
+  return response;
+}
