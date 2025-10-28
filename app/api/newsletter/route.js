@@ -1,7 +1,7 @@
 import PasswordResetConfirmationEmail from "../../../lib/emails/password-reset-confirmation-email";
 import VerificationEmail from "../../../lib/emails/verification-email";
 import WelcomeEmail from "../../../lib/emails/welcome-email";
-import { createAdminClient } from "@/utils/supabase/client";
+import { createAdminClient } from "@/lib/supabaseAdmin";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
