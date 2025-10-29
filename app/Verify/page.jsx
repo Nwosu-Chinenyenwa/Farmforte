@@ -57,7 +57,7 @@ export default function VerifyForm() {
           }),
         });
 
-        router.push('/Login');
+        router.push('/Home');
       }
     } catch (err) {
       setError(

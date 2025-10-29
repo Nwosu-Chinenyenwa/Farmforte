@@ -3,6 +3,7 @@ import "./globals.css";
 import toast, { Toaster } from "react-hot-toast";
 import TabTitleWatcher from "./Components/TabTitleWatcher";
 import Link from "next/link";
+import ChatbaseWidget from "./Components/Chatbase";
 
 export const metadata = {
   title: "Farmforte Agriculture",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         </Link>
         {children}
         <Toaster />
+        <ChatbaseWidget/>
       </body>
     </html>
   );

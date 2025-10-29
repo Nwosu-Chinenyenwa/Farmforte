@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import AllNav from "../Components/AllNav";
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@supabase/supabase-js";
 import logo from "../../public/img/logo-two.png";
 import eggplant from "../../public/img/eggplant.png";
 import pawpaw from "../../public/asset/pawpaw.webp";
@@ -36,6 +39,42 @@ export default function page() {
       description: "Juicy red tomatoes.",
     },
   ];
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    const payload = {
+      user_id: "anonymous",
+      status: "pending",
+      currency: "USD",
+      amount: 1020,
+      item_count: product.length,
+      metadata: data,
+      stribe_session_id: null, 
+    };
+
+    try {
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        alert("Order saved successfully!");
+        e.target.reset();
+      } else {
+        console.error(result.error);
+        alert("Failed to save order.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to save order.");
+    }
+  };
+
   return (
     <>
       <section>
@@ -49,7 +88,7 @@ export default function page() {
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
-                <path d="M9 6H15C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6ZM7 6C7 3.23858 9.23858 1 12 1C14.7614 1 17 3.23858 17 6H20C20.5523 6 21 6.44772 21 7V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V7C3 6.44772 3.44772 6 4 6H7ZM5 8V20H19V8H5ZM9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10H17C17 12.7614 14.7614 15 12 15C9.23858 15 7 12.7614 7 10H9Z"></path>
+                <path d="M9 6H15C15 4.34315 13.6569 3 12 3C10.3431 3 9 4.34315 9 6ZM7 6C7 3.23858 9.23858 1 12 1C14.7614 1 17 3.23858 17 6H20C20.5523 6 21 6.44772 21 7V21C21 21.5523 22 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V7C3 6.44772 3.44772 6 4 6H7ZM5 8V20H19V8H5ZM9 10C9 11.6569 10.3431 13 12 13C13.6569 13 15 11.6569 15 10H17C17 12.7614 14.7614 15 12 15C9.23858 15 7 12.7614 7 10H9Z"></path>
               </svg>
             </Link>
           </nav>
@@ -75,9 +114,10 @@ export default function page() {
             </Link>
           </span>
         </div>
-        <form>
-          <section className="border-t-1 w-[90vw] m-auto flex  justify-center py-10 text-[#333333] border-[#0000001e] ">
-            <div className="lg:w-[40vw]  justify-end ">
+
+        <form onSubmit={handleSubmit}>
+          <section className="border-t-1 w-[90vw] m-auto flex justify-center py-10 text-[#333333] border-[#0000001e] ">
+            <div className="lg:w-[40vw] justify-end ">
               <h3 className="rajdhani-light font-bold text-3xl border-b-1 border-[#0000001e] pb-1 mb-10">
                 Billing Details
               </h3>
@@ -89,12 +129,11 @@ export default function page() {
                 >
                   Country*
                 </label>
-
                 <select
                   id="country"
                   name="country"
                   required
-                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] rounded px-4 py-3 outline-none"
                 >
                   <option value="">Nigeria</option>
                   <option value="United Arab Emirates">
@@ -111,26 +150,28 @@ export default function page() {
               <div className="flex gap-4 mb-5">
                 <span>
                   <label
-                    htmlFor="first name"
+                    htmlFor="first_name"
                     className="text-[20px] rajdhani-light font-[500]"
                   >
                     First Name*
                   </label>
                   <input
-                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                    name="first_name"
+                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                     type="text"
                     required
                   />
                 </span>
                 <span>
                   <label
-                    htmlFor="first name"
+                    htmlFor="last_name"
                     className="text-[20px] rajdhani-light font-[500]"
                   >
                     Last Name*
                   </label>
                   <input
-                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                    name="last_name"
+                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                     type="text"
                     required
                   />
@@ -140,26 +181,28 @@ export default function page() {
               <div className="flex gap-4 mb-5">
                 <span>
                   <label
-                    htmlFor="first name"
+                    htmlFor="state"
                     className="text-[20px] rajdhani-light font-[500]"
                   >
                     State / County *
                   </label>
                   <input
-                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                    name="state"
+                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                     type="text"
                     required
                   />
                 </span>
                 <span>
                   <label
-                    htmlFor="first name"
+                    htmlFor="phone"
                     className="text-[20px] rajdhani-light font-[500]"
                   >
                     Phone*
                   </label>
                   <input
-                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                    name="phone"
+                    className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                     type="text"
                     required
                   />
@@ -168,33 +211,37 @@ export default function page() {
 
               <div className="mb-5">
                 <label
-                  htmlFor="first name"
+                  htmlFor="company"
                   className="text-[20px] rajdhani-light font-[500]"
                 >
                   Company Name*
                 </label>
                 <input
-                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                  name="company"
+                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                   type="text"
                   placeholder="IGHUB (optional)"
                 />
               </div>
+
               <div className="mb-5">
                 <label
-                  htmlFor="first name"
+                  htmlFor="email"
                   className="text-[20px] rajdhani-light font-[500]"
                 >
                   Email Address *
                 </label>
                 <input
-                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                  name="email"
+                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                   type="text"
                 />
               </div>
 
               <div className="mb-5">
                 <textarea
-                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e]  rounded px-4 py-3  outline-none"
+                  name="order_note"
+                  className="w-full border-1 border-[#0000001e] transition cursor-pointer hover:border-[#209e2e] focus:border-[#209e2e] rounded px-4 py-3 outline-none"
                   type="text"
                   placeholder="Order note"
                 />
@@ -204,6 +251,7 @@ export default function page() {
                 PLACE ORDER
               </button>
             </div>
+
             <div className="w-[35vw] ml-10 hidden lg:block">
               <h3 className="rajdhani-light font-bold text-3xl border-b-1 border-[#0000001e] pb-1 mb-10">
                 Your order
@@ -221,12 +269,11 @@ export default function page() {
                           src={product.img}
                           alt={product.name}
                         />
-
                         <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#209e2e] rounded-[5px]">
                           1
                         </span>
                       </li>
-                      <p className="rajdhani-light font-[700] ">
+                      <p className="rajdhani-light font-[700]">
                         {product.name}
                       </p>
                     </span>
