@@ -342,12 +342,14 @@ export default function Page() {
               </tbody>
             </table>
 
-            <button
-              onClick={() => router.push("/Checkout")}
-              className="mt-6 w-full bg-[#28a745] text-white text-[16px] font-semibold py-3 rounded-full hover:bg-[#333333] transition cursor-pointer"
-            >
-              Proceed To Checkout →
-            </button>
+            <Link href={"/Checkout"}>
+              <button
+                onClick={() => router.push("/Checkout")}
+                className="mt-6 w-full bg-[#28a745] text-white text-[16px] font-semibold py-3 rounded-full hover:bg-[#333333] transition cursor-pointer"
+              >
+                Proceed To Checkout →
+              </button>
+            </Link>
           </div>
         </section>
       </section>

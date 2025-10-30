@@ -9,28 +9,6 @@ import Subcribe from "../Components/Subcribe";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Contact() {
-  const [status, setStatus] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (res.ok) {
-      toast.success("Message sent successfully!");
-      e.target.reset();
-    } else {
-      toast.error("Failed to send message. Please try again.");
-
-    }
-  };
   return (
     <>
       <section className="pagetitle">
@@ -97,7 +75,7 @@ export default function Contact() {
       <section>
         <div className="flex items-center justify-center py-10">
           <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-5xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form  className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <input

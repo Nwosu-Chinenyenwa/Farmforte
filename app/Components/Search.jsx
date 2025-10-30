@@ -46,12 +46,6 @@ export default function Search() {
           ))}
         </ul>
       )}
-
-      {open && q && results.length === 0 && (
-        <div className="absolute mt-1 w-full bg-white border rounded p-3 text-sm text-gray-600">
-          No product found for “{q}”.
-        </div>
-      )}
     </>
   );
 }
