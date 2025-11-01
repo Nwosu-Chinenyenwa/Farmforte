@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import AllNav from "../Components/AllNav";
 import Subcribe from "../Components/Subcribe";
 import Image from "next/image";
+import { Suspense } from "react";
 import Footer from "../Components/Footer";
 import Link from "next/link";
 import { GrChapterPrevious, GrChapterNext } from "react-icons/gr";
