@@ -229,7 +229,7 @@ export default function Shop() {
   async function toggleLove(product) {
     try {
       const { data: userData } = await supabase.auth.getUser();
-      const currentUser = userData?.user || user; // try both
+      const currentUser = userData?.user || user; 
       if (!currentUser) {
         toast.error("Please sign in to love products.");
         return;
@@ -238,7 +238,6 @@ export default function Shop() {
       const pid = product.id || product.product_id;
       const alreadyLiked = likedSet.has(pid);
 
-      // optimistic UI
       const newLikedSet = new Set(likedSet);
       const updatedProducts = products.map((p) => {
         if ((p.id || p.product_id) !== pid) return p;
@@ -346,7 +345,7 @@ export default function Shop() {
   return (
     <>
       <section className="pagetitle">
-        <AllNav />
+       {/*  <AllNav /> */}
         <div className="py-50 bg-[#00000093] text-white  text-center">
           <h1 className="text-[30px] font-extrabold">Shop</h1>
           <div className="flex items-center justify-center gap-2">
@@ -550,8 +549,8 @@ export default function Shop() {
         </div>
       </section>
 
-      <Subcribe />
-      <Footer />
+    {/*   <Subcribe />
+      <Footer /> */}
 
       {selectedProduct && (
         <ProductQuickView
