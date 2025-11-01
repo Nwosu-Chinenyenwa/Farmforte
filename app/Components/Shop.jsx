@@ -15,17 +15,17 @@ import eggplant from "../../public/img/eggplant.png";
 import milk from "../../public/img/milk.png";
 import toast, { Toaster } from "react-hot-toast";
 
-const FALLBACK_CATEGORIES = [
+/* const FALLBACK_CATEGORIES = [
   "Grains",
   "Vegetables",
   "Herbs",
   "Legumes",
   "Cashcrops",
   "Livestock",
-];
+]; */
 
 export default function Shop() {
-  const [products, setProducts] = useState([]);
+/*   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -341,11 +341,11 @@ export default function Shop() {
       </div>
     );
   }
-
+ */
   return (
     <>
-      <section className="pagetitle">
-       {/*  <AllNav /> */}
+    {/*   <section className="pagetitle">
+        <AllNav />
         <div className="py-50 bg-[#00000093] text-white  text-center">
           <h1 className="text-[30px] font-extrabold">Shop</h1>
           <div className="flex items-center justify-center gap-2">
@@ -549,8 +549,8 @@ export default function Shop() {
         </div>
       </section>
 
-    {/*   <Subcribe />
-      <Footer /> */}
+      <Subcribe />
+      <Footer />
 
       {selectedProduct && (
         <ProductQuickView
@@ -558,7 +558,7 @@ export default function Shop() {
           onClose={() => setSelectedProduct(null)}
         />
       )}
-      <Toaster />
+      <Toaster /> */}
     </>
   );
 }
