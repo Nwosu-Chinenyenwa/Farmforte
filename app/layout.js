@@ -1,3 +1,6 @@
+"use client"
+
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import toast, { Toaster } from "react-hot-toast";
@@ -331,7 +334,7 @@ export default function RootLayout({ children }) {
           </button>
         </Link>
 
-        {children}
+        <Suspense>{children}</Suspense>
         <Toaster />
         <ChatbaseWidget />
       </body>
