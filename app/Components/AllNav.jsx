@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useRef,Suspense } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  Suspense,
+} from "react";
 
 import logo from "../../public/img/logo-two.png";
 import Link from "next/link";
@@ -158,9 +164,11 @@ export default function AllNav() {
                         SignUp
                       </li>
                     </Link>
-                    <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                      <AdminLink />
-                    </li>
+                    <Link href="/admin">
+                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
+                        Admin
+                      </li>
+                    </Link>
                   </ul>
                 </li>
               </ul>
@@ -217,8 +225,8 @@ export default function AllNav() {
 
                 {view && (
                   <div className="absolute top-15 left-0 bg-white w-[80vw] h-[60px] flex items-center justify-center">
-                        <Suspense fallback={<div>Loading search...</div>}>
-                    <Search />
+                    <Suspense fallback={<div>Loading search...</div>}>
+                      <Search />
                     </Suspense>
                   </div>
                 )}

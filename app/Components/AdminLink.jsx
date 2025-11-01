@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { createClient } from "../../utils/supabase/client";
 
-export default function AdminLink() {
+function AdminLinkContent() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [checked, setChecked] = useState(false); 
 
@@ -53,8 +53,16 @@ export default function AdminLink() {
   if (!isAdmin) return null;
 
   return (
-    <Link href="/admin" >
+    <Link href="/admin">
       Admin
     </Link>
+  );
+}
+
+export default function AdminLink() {
+  return (
+    <Suspense fallback={null}>
+      <AdminLinkContent />
+    </Suspense>
   );
 }
