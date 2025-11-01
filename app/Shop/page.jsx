@@ -25,7 +25,6 @@ const FALLBACK_CATEGORIES = [
 ];
 
 export default function ShopPage() {
-  // removed useSearchParams and all related query-param logic
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -41,6 +40,7 @@ export default function ShopPage() {
       setLoading(true);
 
       let catData = null;
+      let row = [];
       try {
         const { data: categoryRows, error: catError } = await supabase
           .from("products")
@@ -59,7 +59,10 @@ export default function ShopPage() {
           }
         } else {
           if (catError)
-            console.warn("categories fetch error:", catError.message || catError);
+            console.warn(
+              "categories fetch error:",
+              catError.message || catError
+            );
         }
       } catch (err) {
         console.warn("categories fetch threw (falling back):", err);
@@ -85,7 +88,9 @@ export default function ShopPage() {
 
           if (!catData) {
             const cats = Array.from(
-              new Set(rows.map((r) => (r.category || "").trim()).filter(Boolean))
+              new Set(
+                rows.map((r) => (r.category || "").trim()).filter(Boolean)
+              )
             );
             if (cats.length) {
               setCategories(cats);
@@ -148,12 +153,13 @@ export default function ShopPage() {
     load();
   }, []);
 
-  // NOTE: query param effect removed — if you depended on ?category / ?productId / ?search auto-opening,
-  // that behavior is no longer available. We can reintroduce via router or server props if desired.
+  // Removed the useEffect that used searchParams
 
   const activeCategory = categories[activeIndex] || categories[0];
   const activeProducts = products.filter((p) =>
-    (p.category || "").toLowerCase().includes((activeCategory || "").toLowerCase())
+    (p.category || "")
+      .toLowerCase()
+      .includes((activeCategory || "").toLowerCase())
   );
 
   const handleNext = () => {
