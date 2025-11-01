@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import AllNav from "../Components/AllNav";
 import Subcribe from "../Components/Subcribe";
 import Image from "next/image";
-import { Suspense } from "react";
 import Footer from "../Components/Footer";
 import Link from "next/link";
 import { GrChapterPrevious, GrChapterNext } from "react-icons/gr";
@@ -159,14 +158,12 @@ export default function ShopPage() {
     load();
   }, []);
 
-  // --- NEW: read query params and open category / product when present
   useEffect(() => {
     if (!searchParams) return;
     const catParam = searchParams.get("category");
     const productIdParam = searchParams.get("productId");
     const searchTerm = searchParams.get("search");
 
-    // If categories and products already loaded, try to set activeIndex and open product
     if (categories && categories.length) {
       if (catParam) {
         const idxExact = categories.findIndex(
@@ -175,14 +172,12 @@ export default function ShopPage() {
         if (idxExact !== -1) {
           setActiveIndex(idxExact);
         } else {
-          // fallback to partial match
           const idxPartial = categories.findIndex((c) =>
             (c || "").toLowerCase().includes((catParam || "").toLowerCase())
           );
           if (idxPartial !== -1) setActiveIndex(idxPartial);
         }
       } else if (searchTerm && searchTerm.trim()) {
-        // searchTerm exists - try to find a category that matches the term
         const idx = categories.findIndex((c) =>
           (c || "").toLowerCase().includes(searchTerm.toLowerCase())
         );
@@ -197,10 +192,10 @@ export default function ShopPage() {
       );
       if (found) {
         setSelectedProduct(found);
-        // also set activeIndex to product's category if possible
         if (found.category && categories && categories.length) {
           const idx = categories.findIndex(
-            (c) => (c || "").toLowerCase() === (found.category || "").toLowerCase()
+            (c) =>
+              (c || "").toLowerCase() === (found.category || "").toLowerCase()
           );
           if (idx !== -1) setActiveIndex(idx);
         }
@@ -208,7 +203,6 @@ export default function ShopPage() {
     }
   }, [categories, products, searchParamsStr]);
 
-  // rest of your ShopPage code continues unchanged...
   const activeCategory = categories[activeIndex] || categories[0];
   const activeProducts = products.filter((p) =>
     (p.category || "")
@@ -269,12 +263,6 @@ export default function ShopPage() {
       setAddingToCartId(null);
     }
   }
-
-
-
-
-
-
 
   function computeStars(likesCount = 0) {
     const fullStars = Math.floor(likesCount / 2);
@@ -406,224 +394,224 @@ export default function ShopPage() {
   }
 
   return (
-    <>
-      <Suspense fallback={<div>Loading shop...</div>}>
-      <section className="pagetitle">
-        <AllNav />
-        <div className="py-50 bg-[#00000093] text-white  text-center">
-          <h1 className="text-[30px] font-extrabold">Shop</h1>
-          <div className="flex items-center justify-center gap-2">
-            <Link href={"/Home"}>
-              <p className="cursor-pointer">Home</p>
-            </Link>
-            <span className="w-[5px] h-[5px] rounded-full bg-[#209e2e] block"></span>
-            <p className="cursor-pointer">Shop</p>
+    <Suspense fallback={<div>Loading shop...</div>}>
+      <>
+        <section className="pagetitle">
+          <AllNav />
+          <div className="py-50 bg-[#00000093] text-white  text-center">
+            <h1 className="text-[30px] font-extrabold">Shop</h1>
+            <div className="flex items-center justify-center gap-2">
+              <Link href={"/Home"}>
+                <p className="cursor-pointer">Home</p>
+              </Link>
+              <span className="w-[5px] h-[5px] rounded-full bg-[#209e2e] block"></span>
+              <p className="cursor-pointer">Shop</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mt-10 py-30 flex flex-col items-center justify-center gap-0 lg:gap-3">
-        <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
-          Welcome TO OUR SHOP
-        </p>
-        <h2 className="text-[38px] text-center font-[700] text-[#333333]">
-          Buy our product
-        </h2>
-        <p className="text-[#7a7e9a] text-[16px] text-center md:max-w-[605px] lg:max-w-[605px] m-auto">
-          Shop smarter with our premium collection of top-rated items.
-        </p>
+        <section className="mt-10 py-30 flex flex-col items-center justify-center gap-0 lg:gap-3">
+          <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
+            Welcome TO OUR SHOP
+          </p>
+          <h2 className="text-[38px] text-center font-[700] text-[#333333]">
+            Buy our product
+          </h2>
+          <p className="text-[#7a7e9a] text-[16px] text-center md:max-w-[605px] lg:max-w-[605px] m-auto">
+            Shop smarter with our premium collection of top-rated items.
+          </p>
 
-        <div className="flex gap-5 my-5 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 sm:px-4 md:px-6">
-          {categories.map((name, i) => (
-            <button
-              key={name}
-              onClick={() => setActiveIndex(i)}
-              className={`px-3 py-1 text-[18px] cursor-pointer flex-shrink-0 transition ${
-                activeIndex === i
-                  ? "text-[#209e2e] font-bold"
-                  : "text-[#8d8c8c] hover:text-[#209e2e]"
-              }`}
-            >
-              {name}
-            </button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {loading ? (
-            <div className="col-span-full flex items-center justify-center w-full h-full">
-              <div className="flex flex-col gap-4 items-center justify-center">
-                <div className="w-20 h-20 border-4 border-transparent animate-spin border-t-blue-400 rounded-full flex items-center justify-center">
-                  <div className="w-16 h-16 border-4 border-transparent animate-spin border-t-[#209e2e] rounded-full flex items-center justify-center"></div>
-                </div>
-              </div>
-            </div>
-          ) : activeProducts.length > 0 ? (
-            activeProducts.map((product) => (
-              <div
-                key={product.product_id || product.id}
-                className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed  w-[90vw] md:w-[45vw] lg:w-[30vw] xl:w-[20vw] lg:relative lg:right-3  text-center border-[#209e2e]  hover:bg-white transition"
+          <div className="flex gap-5 my-5 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 sm:px-4 md:px-6">
+            {categories.map((name, i) => (
+              <button
+                key={name}
+                onClick={() => setActiveIndex(i)}
+                className={`px-3 py-1 text-[18px] cursor-pointer flex-shrink-0 transition ${
+                  activeIndex === i
+                    ? "text-[#209e2e] font-bold"
+                    : "text-[#8d8c8c] hover:text-[#209e2e]"
+                }`}
               >
-                <div className=" flex flex-col gap-3 text-center items-center">
-                  <div className="w-[30vw] md:w-[20vw] lg:w-[12vw] h-[150px] overflow-hidden flex items-center justify-center">
-                    <img
-                      className="w-full h-full object-cover"
-                      src={product.image_url || eggplant.src}
-                      alt={product.name}
-                    />
-                  </div>
-
-                  <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
-                    {product.name}
-                  </h3>
-                  <div>
-                    <div className="flex gap-2 text-center">
-                      <span className="text-[#ff000098] text-[18px] line-through font-bold transition">
-                        ₦ {product.discount_price}
-                      </span>
-                      <span className="text-[#000000b1]">/</span>
-                      <span className="text-[#209e2e] text-[18px] font-bold transition">
-                        ₦{parsePrice(product.price).toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
-                    <span className="w-[25vw] lg:w-[10vw] md:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
-
-                    <span className="flex gap-1">
-                      {computeStars(product.likes_count).map((s, idx) => {
-                        if (s === "full") {
-                          return (
-                            <svg
-                              key={idx}
-                              className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                            >
-                              <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
-                            </svg>
-                          );
-                        } else if (s === "half") {
-                          return (
-                            <svg
-                              key={idx}
-                              className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                            >
-                              <path d="M12.0006 15.968L16.2473 18.3451L15.2988 13.5717L18.8719 10.2674L14.039 9.69434L12.0006 5.27502V15.968ZM12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z"></path>
-                            </svg>
-                          );
-                        } else {
-                          return (
-                            <svg
-                              key={idx}
-                              className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                            >
-                              <path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26ZM12.0006 15.968L16.2473 18.3451L15.2988 13.5717L18.8719 10.2674L14.039 9.69434L12.0006 5.27502L9.96214 9.69434L5.12921 10.2674L8.70231 13.5717L7.75383 18.3451L12.0006 15.968Z"></path>
-                            </svg>
-                          );
-                        }
-                      })}
-                    </span>
-
-                    <span className="w-[25vw]  md:w-[10vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
-                  </div>
-
-                  <div className="flex justify-center items-center gap-3 mt-5">
-                    <svg
-                      className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
-                    </svg>
-                    <div className="relative">
-                      {addingToCartId === product.id ? (
-                        <div className="w-12 h-12 border-4 border-[#209e2e] border-t-transparent rounded-full animate-spin"></div>
-                      ) : (
-                        <svg
-                          onClick={() => addToCart(product)}
-                          disabled={
-                            product.stock !== undefined &&
-                            Number(product.stock) <= 0
-                          }
-                          className={`w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition ${
-                            product.stock !== undefined &&
-                            Number(product.stock) <= 0
-                              ? "text-gray-400 cursor-not-allowed"
-                              : "text-[#209e2e] cursor-pointer"
-                          }`}
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
-                        </svg>
-                      )}
-                    </div>
-
-                    <svg
-                      onClick={() => toggleLove(product)}
-                      className={`w-10 bg-[#eafef1] ${likedSet.has(product.id || product.product_id) ? "text-white bg-[#209e2e]" : "text-[#209e2e]"} border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer`}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      role="button"
-                      aria-pressed={likedSet.has(
-                        product.id || product.product_id
-                      )}
-                      aria-label={`${product.likes_count || 0} loves`}
-                    >
-                      <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
-                    </svg>
+                {name}
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {loading ? (
+              <div className="col-span-full flex items-center justify-center w-full h-full">
+                <div className="flex flex-col gap-4 items-center justify-center">
+                  <div className="w-20 h-20 border-4 border-transparent animate-spin border-t-blue-400 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 border-4 border-transparent animate-spin border-t-[#209e2e] rounded-full flex items-center justify-center"></div>
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-span-full text-center">
-              <p className="text-[25px] my-20 font-bold text-[#8d8c8c]">
-                No products in this category
-              </p>
-            </div>
-          )}
-        </div>
+            ) : activeProducts.length > 0 ? (
+              activeProducts.map((product) => (
+                <div
+                  key={product.product_id || product.id}
+                  className="bg-[#d2ecd5] rounded-sm py-10 group  border-1 border-dashed  w-[90vw] md:w-[45vw] lg:w-[30vw] xl:w-[20vw] lg:relative lg:right-3  text-center border-[#209e2e]  hover:bg-white transition"
+                >
+                  <div className=" flex flex-col gap-3 text-center items-center">
+                    <div className="w-[30vw] md:w-[20vw] lg:w-[12vw] h-[150px] overflow-hidden flex items-center justify-center">
+                      <img
+                        className="w-full h-full object-cover"
+                        src={product.image_url || eggplant.src}
+                        alt={product.name}
+                      />
+                    </div>
 
-        <div className="flex gap-4 mt-10">
-          <button
-            title="provious"
-            onClick={handlePrev}
-            className={`py-2 px-10 bg-[#209e2e] text-[white] cursor-pointer text-[20px] shadow-sm ${activeIndex === 0 ? "opacity-50 cursor-not-allowed text-[black]" : ""}`}
-          >
-            <GrChapterPrevious />
-          </button>
-          <button
-            title="next"
-            onClick={handleNext}
-            className={`py-2 px-10 bg-[#209e2e] text-[white] cursor-pointer text-[20px] shadow-sm ${activeIndex === categories.length - 1 ? "opacity-50 cursor-not-allowed text-[black]" : ""}`}
-          >
-            <GrChapterNext />
-          </button>
-        </div>
-      </section>
+                    <h3 className="text-[#616161] group-hover:text-[#209e2e]   font-extrabold text-[20px] transition">
+                      {product.name}
+                    </h3>
+                    <div>
+                      <div className="flex gap-2 text-center">
+                        <span className="text-[#ff000098] text-[18px] line-through font-bold transition">
+                          ₦ {product.discount_price}
+                        </span>
+                        <span className="text-[#000000b1]">/</span>
+                        <span className="text-[#209e2e] text-[18px] font-bold transition">
+                          ₦{parsePrice(product.price).toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center  gap-2 lg:w-[20vw] justify-between">
+                      <span className="w-[25vw] lg:w-[10vw] md:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
 
-      <Subcribe />
-      <Footer />
+                      <span className="flex gap-1">
+                        {computeStars(product.likes_count).map((s, idx) => {
+                          if (s === "full") {
+                            return (
+                              <svg
+                                key={idx}
+                                className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M23.9996 12.0235C17.5625 12.4117 12.4114 17.563 12.0232 24H11.9762C11.588 17.563 6.4369 12.4117 0 12.0235V11.9765C6.4369 11.5883 11.588 6.43719 11.9762 0H12.0232C12.4114 6.43719 17.5625 11.5883 23.9996 11.9765V12.0235Z"></path>
+                              </svg>
+                            );
+                          } else if (s === "half") {
+                            return (
+                              <svg
+                                key={idx}
+                                className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M12.0006 15.968L16.2473 18.3451L15.2988 13.5717L18.8719 10.2674L14.039 9.69434L12.0006 5.27502V15.968ZM12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z"></path>
+                              </svg>
+                            );
+                          } else {
+                            return (
+                              <svg
+                                key={idx}
+                                className="text-[#f4a708] w-[20px] group-hover:text-[#209e2e] transition"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26ZM12.0006 15.968L16.2473 18.3451L15.2988 13.5717L18.8719 10.2674L14.039 9.69434L12.0006 5.27502L9.96214 9.69434L5.12921 10.2674L8.70231 13.5717L7.75383 18.3451L12.0006 15.968Z"></path>
+                              </svg>
+                            );
+                          }
+                        })}
+                      </span>
 
-      {selectedProduct && (
-        <ProductQuickView
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-        />
-      )}
-      <Toaster />
-      </Suspense>
-    </>
+                      <span className="w-[25vw]  md:w-[10vw] lg:w-[10vw] block bg-[#209e2e] h-[1px]"></span>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-3 mt-5">
+                      <svg
+                        className="w-10 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
+                      </svg>
+                      <div className="relative">
+                        {addingToCartId === product.id ? (
+                          <div className="w-12 h-12 border-4 border-[#209e2e] border-t-transparent rounded-full animate-spin"></div>
+                        ) : (
+                          <svg
+                            onClick={() => addToCart(product)}
+                            disabled={
+                              product.stock !== undefined &&
+                              Number(product.stock) <= 0
+                            }
+                            className={`w-12 bg-[#eafef1] text-[#209e2e] border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition ${
+                              product.stock !== undefined &&
+                              Number(product.stock) <= 0
+                                ? "text-gray-400 cursor-not-allowed"
+                                : "text-[#209e2e] cursor-pointer"
+                            }`}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path>
+                          </svg>
+                        )}
+                      </div>
+
+                      <svg
+                        onClick={() => toggleLove(product)}
+                        className={`w-10 bg-[#eafef1] ${likedSet.has(product.id || product.product_id) ? "text-white bg-[#209e2e]" : "text-[#209e2e]"} border-1 p-2 hover:text-white hover:bg-[#209e2e] rounded-4xl transition cursor-pointer`}
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        role="button"
+                        aria-pressed={likedSet.has(
+                          product.id || product.product_id
+                        )}
+                        aria-label={`${product.likes_count || 0} loves`}
+                      >
+                        <path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center">
+                <p className="text-[25px] my-20 font-bold text-[#8d8c8c]">
+                  No products in this category
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-4 mt-10">
+            <button
+              title="provious"
+              onClick={handlePrev}
+              className={`py-2 px-10 bg-[#209e2e] text-[white] cursor-pointer text-[20px] shadow-sm ${activeIndex === 0 ? "opacity-50 cursor-not-allowed text-[black]" : ""}`}
+            >
+              <GrChapterPrevious />
+            </button>
+            <button
+              title="next"
+              onClick={handleNext}
+              className={`py-2 px-10 bg-[#209e2e] text-[white] cursor-pointer text-[20px] shadow-sm ${activeIndex === categories.length - 1 ? "opacity-50 cursor-not-allowed text-[black]" : ""}`}
+            >
+              <GrChapterNext />
+            </button>
+          </div>
+        </section>
+
+        <Subcribe />
+        <Footer />
+
+        {selectedProduct && (
+          <ProductQuickView
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+          />
+        )}
+        <Toaster />
+      </>
+    </Suspense>
   );
 }
