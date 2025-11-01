@@ -10,7 +10,7 @@ export const updateSession = async (request) => {
   });
 
   if (!supabaseUrl || !supabaseKey) {
-    console.error("❌ Missing Supabase environment variables");
+    console.error("Missing Supabase environment variables");
     return response;
   }
 
@@ -30,7 +30,10 @@ export const updateSession = async (request) => {
   let user = null;
 
   try {
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
 
     if (sessionError) {
       console.error("Session error:", sessionError.message);
@@ -42,13 +45,16 @@ export const updateSession = async (request) => {
   }
 
   const pathname = request.nextUrl.pathname;
-  const isNewPasswordPage = pathname === "/ResetPassword";
 
-  if (user && pathname.startsWith("/Login") && !isNewPasswordPage) {
+  const isLoginPage = pathname.startsWith("/Login");
+  const isResetPage = pathname === "/ResetPassword";
+
+  if (user && isLoginPage && !isResetPage) {
     return NextResponse.redirect(new URL("/Home", request.url));
   }
 
-  if (!user && (pathname.startsWith("/Checkout") || pathname.startsWith("/Profile"))) {
+  const protectedUserRoutes = ["/Checkout", "/Profile"];
+  if (!user && protectedUserRoutes.some((path) => pathname.startsWith(path))) {
     return NextResponse.redirect(new URL("/Login", request.url));
   }
 
