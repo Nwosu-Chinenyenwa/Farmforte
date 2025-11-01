@@ -61,7 +61,7 @@ export const updateSession = async (request) => {
       isAdmin = true;
     }
   }
-
+/* 
   if (pathname.startsWith("/admin") && !isAdmin) {
     return NextResponse.redirect(new URL("/Login", request.url));
   }
@@ -79,7 +79,7 @@ export const updateSession = async (request) => {
   }
   if (pathname.startsWith("/Transactions") && !isAdmin) {
     return NextResponse.redirect(new URL("/Login", request.url));
-  }
+  } */
 
   return supabaseResponse;
 };

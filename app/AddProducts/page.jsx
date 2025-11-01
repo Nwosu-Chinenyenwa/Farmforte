@@ -344,7 +344,7 @@ export default function page() {
                   <div className="flex flex-col gap-5 w-full">
                     <div className="h-fit bg-white  w-full rounded-xl shadow-md overflow-hidden">
                       <div className="font-[500] text-[#111928] px-5 py-5  border-b-1 border-[#00000014]">
-                        <h3>Add product phote</h3>
+                        <h3>Add product photo</h3>
                       </div>
 
                       <div className="p-6 space-y-4">

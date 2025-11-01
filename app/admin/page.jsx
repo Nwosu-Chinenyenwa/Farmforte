@@ -17,6 +17,7 @@ import Rocket from "../../public/404.png";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { AiFillProduct } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { CiMenuKebab } from "react-icons/ci";
 import {
   LineChart,
   Line,
@@ -44,6 +45,8 @@ export default function page() {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chartData, setChartData] = useState([]);
+  const [aside, setaside] = useState(false);
+  const [showProfile, setshowProfile] = useState(false);
   const [percentages, setPercentages] = useState({
     earning: 0,
     users: 0,
@@ -523,14 +526,152 @@ export default function page() {
     }
   }, [totalEarning, totalUsers, totalProducts]);
 
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error("Error logging out:", error.message);
+        alert("Logout failed. Please try again.");
+      } else {
+        console.log("router.push to loging")
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
+  };
+
   return (
     <>
-      <section className="bg-[#e6e8ec] ">
+      <section className="bg-[#e6e8ec] md:h-[100vh] lg:h-[100vh]">
         <div className="flex">
-          <Aside />
+          {aside && (
+            <div className="xl:hidden">
+              <Aside />
+            </div>
+          )}
+
+          <div className="hidden xl:block">
+            <Aside />
+          </div>
+
           <div>
-            <AdminNav />
-            <div className="w-[70vw] m-auto">
+            <div className="xl:w-[80vw] w-[100vw]">
+              <header className="">
+                <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                  <span className="hidden lg:flex items-center gap-3 xl:hidden ">
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[30px]"
+                  />
+                       <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                    Overview
+                  </h2>
+                  </span>
+                  <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                    Overview
+                  </h2>
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[35px] lg:hidden"
+                  />
+                  <div className="flex items-center gap-3">
+                    <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                      <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                      <input
+                        type="text"
+                        placeholder="Search for something"
+                        className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                      />
+                    </div>
+
+                    <Link href={"/AdminSetting"}>
+                      <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                    </Link>
+                    <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+
+                    <div>
+                      <Image
+                        onClick={() => setshowProfile(!showProfile)}
+                        className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                        src={user}
+                        alt="You"
+                      />
+                    </div>
+                  </div>
+                </nav>
+
+                {showProfile && (
+                  <div className="relative z-10">
+                    <div className="absolute top-2 right-10 w-[280px] bg-white rounded-[12px] shadow-md py-4 px-7">
+                      <h3 className="text-[#343c6a] text-[14px] font-[700] mb-3">
+                        User Profile
+                      </h3>
+
+                      <div className="flex items-center gap-5 border-b border-[#e5e7eb] pb-4">
+                        <Image
+                          src={user}
+                          alt="Profile"
+                          width={48}
+                          height={48}
+                          className="rounded-full w-[50px] h-[50px] "
+                        />
+                        <div className="flex flex-col gap-1">
+                          <h6 className="text-[#343c6a] text-[14px] font-[600]">
+                            Charlene Reed
+                          </h6>
+                          <p className="text-[#8ba3cb] text-[12px] font-[500]">
+                            Designer
+                          </p>
+                          <div className="flex items-center gap-1 text-[#8ba3cb] text-[12px]">
+                            <Mail size={12} />
+                            <span>info@dashbank.com</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Link href={"/AdminProfile"}>
+                        <div className="flex items-center gap-2 my-4 cursor-pointer">
+                          <div className="bg-[#e7edff] p-2 rounded-[8px]">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="w-[20px] h-[20px] text-[#718ebf]"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M5.121 17.804A4 4 0 016 17h12a4 4 0 01.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                              />
+                            </svg>
+                          </div>
+                          <div>
+                            <h6 className="text-[#343c6a] text-[13px] font-[600]">
+                              My Profile
+                            </h6>
+                            <p className="text-[#8ba3cb] text-[12px] font-[500]">
+                              Account Settings
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+
+                      <button
+                        onClick={handleLogout}
+                        className="w-full border-1 border-[#ff5e5e] text-[#ff5e5e] font-[600] py-2 rounded-full hover:bg-[#ff5e5e17] cursor-pointer  transition"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </header>
+            </div>
+
+            <div className="xl:w-[70vw] m-auto">
               <div>
                 <nav className="flex justify-between p-3 ">
                   <div className="flex flex-col text-[#27272a]">
@@ -545,7 +686,7 @@ export default function page() {
                       <p>Dashboard</p>
                     </span>
 
-                    <span className="flex items-center gap-1">
+                    <span className="lg:flex hidden items-center gap-1">
                       <svg
                         className="w-5 text-[gold]"
                         xmlns="http://www.w3.org/2000/svg"
@@ -558,7 +699,7 @@ export default function page() {
                     </span>
                   </div>
 
-                  <div className="flex gap-5 items-center">
+                  <div className="lg:flex md:block gap-5 items-center hidden">
                     <span className="flex gap-2">
                       <Link href={"/Signup"}>
                         <button className="border-2 cursor-pointer border-[#1C4532] p-1 px-8 rounded-4xl font-bold text-[#1C4532]">
@@ -575,9 +716,9 @@ export default function page() {
                 </nav>
 
                 <div className="p-1">
-                  <div className="flex gap-3">
-                    <div className="grid grid-cols-2 w-[35vw] gap-3">
-                      <div className="bg-[#1C4532] w-[15vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
+                  <div className="lg:flex gap-3 lg:m-auto lg:gap-7 lg:items-center lg:justify-center">
+                    <div className="grid grid-cols-2 xl:w-[35vw] lg:w-[40vw] gap-3">
+                      <div className="bg-[#1C4532] xl:w-[15vw] lg:w-[20vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
                         <TbCurrencyNaira className="text-[40px] bg-[white] p-2 rounded-4xl text-[black]" />
                         <span className="flex justify-between items-center">
                           <p className="text-[white] font-bold text-2xl">
@@ -588,7 +729,7 @@ export default function page() {
                         </span>
                         <p>Total earning</p>
                       </div>
-                      <div className="bg-[#27272a] w-[15vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
+                      <div className="bg-[#27272a] lg:w-[20vw] xl:w-[15vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -606,7 +747,7 @@ export default function page() {
                         <p>Total Transactions</p>
                       </div>
 
-                      <div className="bg-[#27272a] w-[15vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
+                      <div className="bg-[#27272a] xl:w-[15vw] lg:w-[20vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
                         <AiFillProduct className="text-[40px] bg-[white] p-2 rounded-4xl text-[black]" />
 
                         <span className="flex justify-between items-center">
@@ -617,7 +758,7 @@ export default function page() {
                         <p>Total products</p>
                       </div>
 
-                      <div className="bg-[#1C4532] w-[15vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
+                      <div className="bg-[#1C4532] xl:w-[15vw] lg:w-[20vw] p-5 flex flex-col gap-3 text-[white] rounded-2xl shadow-sm">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -634,20 +775,20 @@ export default function page() {
                         <p>Total users</p>
                       </div>
                     </div>
-
-                    <div className="w-[37vw] shadow-sm rounded-2xl bg-white p-5 flex flex-col gap-5">
-                      <h1 className="font-bold text-[#1c1b1bf0] text-1xl">
+                    <div className="w-full xl:w-[37vw] lg:w-[50vw] lg:mt-0 mt-5 shadow-sm rounded-2xl bg-white p-5 flex flex-col gap-5">
+                      <h1 className="font-bold text-[#1c1b1bf0] text-xl sm:text-lg">
                         Reviews
                       </h1>
+
                       <div className="flex flex-col gap-3">
                         <div className="flex flex-col gap-1">
-                          <span className="flex justify-between">
+                          <span className="flex justify-between text-sm sm:text-base">
                             <h2>Earning Percentage</h2>
                             <p className="text-[#718096] font-bold">
                               {percentages.earning}%
                             </p>
                           </span>
-                          <span className="bg-[whitesmoke] w-[33vw] h-[1vh] rounded-4xl">
+                          <span className="bg-[whitesmoke] w-full sm:w-[80%] md:w-full xl:w-[33vw] h-[1vh] rounded-4xl">
                             <p
                               className="bg-[#1C4532] h-[1.3vh] rounded-4xl"
                               style={{ width: `${percentages.earning}%` }}
@@ -656,13 +797,13 @@ export default function page() {
                         </div>
 
                         <div className="flex flex-col gap-1">
-                          <span className="flex justify-between">
+                          <span className="flex justify-between text-sm sm:text-base">
                             <h2>Users Percentage</h2>
                             <p className="text-[#718096] font-bold">
                               {percentages.users}%
                             </p>
                           </span>
-                          <span className="bg-[whitesmoke] w-[33vw] h-[1vh] rounded-4xl">
+                          <span className="bg-[whitesmoke] w-full sm:w-[80%] md:w-full xl:w-[33vw] h-[1vh] rounded-4xl">
                             <p
                               className="bg-[#1C4532] h-[1.3vh] rounded-4xl"
                               style={{ width: `${percentages.users}%` }}
@@ -671,13 +812,13 @@ export default function page() {
                         </div>
 
                         <div className="flex flex-col gap-1">
-                          <span className="flex justify-between">
+                          <span className="flex justify-between text-sm sm:text-base">
                             <h2>Products Percentage</h2>
                             <p className="text-[#718096] font-bold">
                               {percentages.products}%
                             </p>
                           </span>
-                          <span className="bg-[whitesmoke] w-[33vw] h-[1vh] rounded-4xl">
+                          <span className="bg-[whitesmoke] w-full sm:w-[80%] md:w-full xl:w-[33vw] h-[1vh] rounded-4xl">
                             <p
                               className="bg-[#1C4532] h-[1.3vh] rounded-4xl"
                               style={{ width: `${percentages.products}%` }}
@@ -687,11 +828,10 @@ export default function page() {
                       </div>
 
                       <div>
-                        <p className="text-[#718096] ">
+                        <p className="text-[#718096] text-sm sm:text-base leading-relaxed">
                           More than <strong>1,500,000</strong> developers used
                           Creative Tim's products and over{" "}
-                          <strong>700,000 </strong>
-                          projects were created.
+                          <strong>700,000</strong> projects were created.
                         </p>
                       </div>
                     </div>
@@ -713,7 +853,13 @@ export default function page() {
                         <ResponsiveContainer>
                           <LineChart
                             data={chartData}
-                            margin={{ top: 20, right: 20, left: 0, bottom: 0 , outline: "none" }}
+                            margin={{
+                              top: 20,
+                              right: 20,
+                              left: 0,
+                              bottom: 0,
+                              outline: "none",
+                            }}
                           >
                             <CartesianGrid
                               strokeDasharray="3 3"

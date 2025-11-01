@@ -15,8 +15,6 @@ import eggplant from "../../public/img/eggplant.png";
 import milk from "../../public/img/milk.png";
 import toast, { Toaster } from "react-hot-toast";
 
-import { useSearchParams } from "next/navigation";
-
 const FALLBACK_CATEGORIES = [
   "Grains",
   "Vegetables",
@@ -27,9 +25,7 @@ const FALLBACK_CATEGORIES = [
 ];
 
 export default function ShopPage() {
-  const searchParams = useSearchParams();
-  const searchParamsStr = searchParams ? searchParams.toString() : "";
-
+  // removed useSearchParams and all related query-param logic
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,7 +41,6 @@ export default function ShopPage() {
       setLoading(true);
 
       let catData = null;
-      let row = [];
       try {
         const { data: categoryRows, error: catError } = await supabase
           .from("products")
@@ -64,10 +59,7 @@ export default function ShopPage() {
           }
         } else {
           if (catError)
-            console.warn(
-              "categories fetch error:",
-              catError.message || catError
-            );
+            console.warn("categories fetch error:", catError.message || catError);
         }
       } catch (err) {
         console.warn("categories fetch threw (falling back):", err);
@@ -93,9 +85,7 @@ export default function ShopPage() {
 
           if (!catData) {
             const cats = Array.from(
-              new Set(
-                rows.map((r) => (r.category || "").trim()).filter(Boolean)
-              )
+              new Set(rows.map((r) => (r.category || "").trim()).filter(Boolean))
             );
             if (cats.length) {
               setCategories(cats);
@@ -158,61 +148,12 @@ export default function ShopPage() {
     load();
   }, []);
 
-  // --- NEW: read query params and open category / product when present
-  useEffect(() => {
-    if (!searchParams) return;
-    const catParam = searchParams.get("category");
-    const productIdParam = searchParams.get("productId");
-    const searchTerm = searchParams.get("search");
+  // NOTE: query param effect removed — if you depended on ?category / ?productId / ?search auto-opening,
+  // that behavior is no longer available. We can reintroduce via router or server props if desired.
 
-    // If categories and products already loaded, try to set activeIndex and open product
-    if (categories && categories.length) {
-      if (catParam) {
-        const idxExact = categories.findIndex(
-          (c) => (c || "").toLowerCase() === (catParam || "").toLowerCase()
-        );
-        if (idxExact !== -1) {
-          setActiveIndex(idxExact);
-        } else {
-          // fallback to partial match
-          const idxPartial = categories.findIndex((c) =>
-            (c || "").toLowerCase().includes((catParam || "").toLowerCase())
-          );
-          if (idxPartial !== -1) setActiveIndex(idxPartial);
-        }
-      } else if (searchTerm && searchTerm.trim()) {
-        // searchTerm exists - try to find a category that matches the term
-        const idx = categories.findIndex((c) =>
-          (c || "").toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        if (idx !== -1) setActiveIndex(idx);
-      }
-    }
-
-    if (productIdParam && products && products.length) {
-      const pid = productIdParam;
-      const found = products.find(
-        (p) => String(p.id) === pid || String(p.product_id) === pid
-      );
-      if (found) {
-        setSelectedProduct(found);
-        // also set activeIndex to product's category if possible
-        if (found.category && categories && categories.length) {
-          const idx = categories.findIndex(
-            (c) => (c || "").toLowerCase() === (found.category || "").toLowerCase()
-          );
-          if (idx !== -1) setActiveIndex(idx);
-        }
-      }
-    }
-  }, [categories, products, searchParamsStr]);
-
-  // rest of your ShopPage code continues unchanged...
   const activeCategory = categories[activeIndex] || categories[0];
   const activeProducts = products.filter((p) =>
-    (p.category || "")
-      .toLowerCase()
-      .includes((activeCategory || "").toLowerCase())
+    (p.category || "").toLowerCase().includes((activeCategory || "").toLowerCase())
   );
 
   const handleNext = () => {
@@ -268,12 +209,6 @@ export default function ShopPage() {
       setAddingToCartId(null);
     }
   }
-
-
-
-
-
-
 
   function computeStars(likesCount = 0) {
     const fullStars = Math.floor(likesCount / 2);

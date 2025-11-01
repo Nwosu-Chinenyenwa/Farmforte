@@ -12,6 +12,7 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { CiMenuKebab } from "react-icons/ci";
 
 export default function AdminNav() {
   const [showProfile, setshowProfile] = useState(false);
@@ -35,10 +36,11 @@ export default function AdminNav() {
   };
 
   return (
-    <div className="w-[80vw]">
-      <header className="">
-        <nav className="bg-[#ffffff] flex justify-between py-5 px-7 items-center">
-          <h2 className="text-[#343c6a] font-[600] text-[28px]">Overview</h2>
+    <div className="xl:w-[80vw]">
+      <header>
+        <nav className="bg-[#ffffff] flex justify-between py-5 px-0 xl:px-7 items-center">
+          <h2 className="text-[#343c6a] font-[600] text-[28px] hidden xl:block">Overview</h2>
+            <CiMenuKebab className="text-[35px]"/>
           <div className="flex items-center gap-3">
             <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
               <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
@@ -52,12 +54,12 @@ export default function AdminNav() {
             <Link href={"/AdminSetting"}>
               <IoSettingsOutline className="bg-[#f5f7fa] p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
             </Link>
-            <IoNotificationsSharp className="bg-[#f5f7fa] p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+            <IoNotificationsSharp className="bg-[#f5f7fa] hidden lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
 
             <div>
               <Image
-                onClick={() => setshowProfile(!showProfile)}
-                className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                onClick={() => setshowProfile(!showProfile)}        
+                className="xl:w-[40px] h-[40px] w-[70px]  rounded-full cursor-pointer"
                 src={user}
                 alt="You"
               />
