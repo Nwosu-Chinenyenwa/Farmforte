@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState} from "react";
+import React, { useState } from "react";
 import logo from "../../public/img/logo-two.png";
 import Image from "next/image";
 import sub1 from "../../public/img/1.jpg";
@@ -117,11 +117,7 @@ export default function Nav() {
                   SignUp
                 </li>
               </Link>
-              <Link href="/admin">
-                <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                  Admin
-                </li>
-              </Link>
+              <AdminLink />
             </ul>
           </li>
         </ul>
@@ -140,7 +136,7 @@ export default function Nav() {
 
             {view && (
               <div className="absolute right-0.5 top-15 shadow-sm bg-white w-[23vw] h-[80px] flex items-center justify-center">
-                  <Search />
+                <Search />
               </div>
             )}
           </li>

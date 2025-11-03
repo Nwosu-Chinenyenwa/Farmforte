@@ -163,11 +163,7 @@ export default function AllNav() {
                         SignUp
                       </li>
                     </Link>
-                    <Link href="/admin">
-                      <li className="block hover:text-[#82b440] transition-all hover:ml-1">
-                        Admin
-                      </li>
-                    </Link>
+                      <AdminLink/>
                   </ul>
                 </li>
               </ul>
