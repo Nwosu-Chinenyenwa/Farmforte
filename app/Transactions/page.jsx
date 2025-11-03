@@ -14,9 +14,8 @@ import { createClient } from "@supabase/supabase-js";
 import { CiMenuKebab } from "react-icons/ci";
 import Link from "next/link";
 import user from "../../public/asset/avatar-CDT9_MFd.jpg";
-import {
-  IoSettingsOutline,
-} from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
+import Adminshort from "../Components/Adminshort";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -37,9 +36,8 @@ export default function page() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
   const [loadingNotifications, setLoadingNotifications] = useState(false);
-  const [aside, setaside] = useState(false)
-    const [showProfile, setshowProfile] = useState(false);
-  
+  const [aside, setaside] = useState(false);
+  const [showProfile, setshowProfile] = useState(false);
 
   const fallbackAccounts = [
     {
@@ -387,153 +385,84 @@ export default function page() {
     return `${from}–${to}`;
   }, [pageNum, perPage, visibleTransactions, totalCount]);
 
-  
-    const handleLogout = async () => {
-      try {
-        const { error } = await supabase.auth.signOut();
-  
-        if (error) {
-          console.error("Error logging out:", error.message);
-          alert("Logout failed. Please try again.");
-        } else {
-        }
-      } catch (err) {
-        console.error("Unexpected error:", err);
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error("Error logging out:", error.message);
+        alert("Logout failed. Please try again.");
+      } else {
       }
-    };
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
+  };
 
   return (
-    <section className="bg-[#e6e8ec] h-[100vh]">
+    <section className="overflow-x-hidden w-[100vw]">
       <div className="flex">
-           {aside && (
-                   <div className="xl:hidden">
-                     <Aside />
-                   </div>
-                 )}
+        {aside && (
+          <div className="xl:hidden">
+            <Aside />
+          </div>
+        )}
 
-
-                 
-                           <div className="hidden xl:block">
-                             <Aside />
-                           </div>
+        <div className="hidden xl:block">
+          <Aside />
+        </div>
 
         <div>
-               <div className="xl:w-[80vw] w-[100vw]">
-              <header className="">
-                <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
-                  <span className="hidden lg:flex items-center gap-3 xl:hidden ">
+          <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
+            <header className="">
+              <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                <span className="hidden lg:flex items-center gap-3 xl:hidden">
                   <CiMenuKebab
                     onClick={() => setaside(!aside)}
                     className="text-[30px]"
                   />
-                       <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                  <h2 className="text-[#343c6a] font-[600] text-[28px]">
                     Overview
                   </h2>
-                  </span>
-                  <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
-                    Overview
-                  </h2>
-                  <CiMenuKebab
-                    onClick={() => setaside(!aside)}
-                    className="text-[35px] lg:hidden"
-                  />
-                  <div className="flex items-center gap-3">
-                    <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
-                      <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
-                      <input
-                        type="text"
-                        placeholder="Search for something"
-                        className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
-                      />
-                    </div>
-
-                    <Link href={"/AdminSetting"}>
-                      <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
-                    </Link>
-                    <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
-
-                    <div>
-                      <Image
-                        onClick={() => setshowProfile(!showProfile)}
-                        className="w-[40px] h-[40px]  rounded-full cursor-pointer"
-                        src={user}
-                        alt="You"
-                      />
-                    </div>
+                </span>
+                <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                  Overview
+                </h2>
+                <CiMenuKebab
+                  onClick={() => setaside(!aside)}
+                  className="text-[35px] lg:hidden"
+                />
+                <div className="flex items-center gap-3">
+                  <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                    <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                    <input
+                      type="text"
+                      placeholder="Search for something"
+                      className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                    />
                   </div>
-                </nav>
 
-                {showProfile && (
-                  <div className="relative z-10">
-                    <div className="absolute top-2 right-10 w-[280px] bg-white rounded-[12px] shadow-md py-4 px-7">
-                      <h3 className="text-[#343c6a] text-[14px] font-[700] mb-3">
-                        User Profile
-                      </h3>
+                  <Link href={"/AdminSetting"}>
+                    <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                  </Link>
+                  <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
 
-                      <div className="flex items-center gap-5 border-b border-[#e5e7eb] pb-4">
-                        <Image
-                          src={user}
-                          alt="Profile"
-                          width={48}
-                          height={48}
-                          className="rounded-full w-[50px] h-[50px] "
-                        />
-                        <div className="flex flex-col gap-1">
-                          <h6 className="text-[#343c6a] text-[14px] font-[600]">
-                            Charlene Reed
-                          </h6>
-                          <p className="text-[#8ba3cb] text-[12px] font-[500]">
-                            Designer
-                          </p>
-                          <div className="flex items-center gap-1 text-[#8ba3cb] text-[12px]">
-                            <Mail size={12} />
-                            <span>info@dashbank.com</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Link href={"/AdminProfile"}>
-                        <div className="flex items-center gap-2 my-4 cursor-pointer">
-                          <div className="bg-[#e7edff] p-2 rounded-[8px]">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-[20px] h-[20px] text-[#718ebf]"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M5.121 17.804A4 4 0 016 17h12a4 4 0 01.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
-                          </div>
-                          <div>
-                            <h6 className="text-[#343c6a] text-[13px] font-[600]">
-                              My Profile
-                            </h6>
-                            <p className="text-[#8ba3cb] text-[12px] font-[500]">
-                              Account Settings
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
-
-                      <button
-                        onClick={handleLogout}
-                        className="w-full border-1 border-[#ff5e5e] text-[#ff5e5e] font-[600] py-2 rounded-full hover:bg-[#ff5e5e17] cursor-pointer  transition"
-                      >
-                        Logout
-                      </button>
-                    </div>
+                  <div>
+                    <Image
+                      onClick={() => setshowProfile(!showProfile)}
+                      className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                      src={user}
+                      alt="You"
+                    />
                   </div>
-                )}
-              </header>
-            </div>
+                </div>
+              </nav>
 
-          <div className="xl:w-[70vw] m-auto">
+              {showProfile && <Adminshort />}
+            </header>
+          </div>
+
+          <div className="xl:w-[70vw] w-[95vw] m-auto">
             <div className="py-10">
               <div className="flex justify-between">
                 <h3 className="text-[#1C252E] text-[24px] font-[700]">
@@ -548,7 +477,7 @@ export default function page() {
 
               <div>
                 <div className="py-5">
-                  <div className="flex justify-between">
+                  <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
                     <div className="text-[gray] flex items-center text-[14px] gap-3">
                       <span className="flex items-center">
                         <IoIosArrowForward />
@@ -616,7 +545,7 @@ export default function page() {
                         )}
                       </div>
 
-                      <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                      <div className="flex bg-[#f5f7fa] items-center gap-2 p-2 sm:p-3 rounded-full w-full sm:w-auto">
                         <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
                         <input
                           type="text"
@@ -640,73 +569,75 @@ export default function page() {
                     </h3>
                   </div>
 
-                  <div className="w-full max-w-[1280px] bg-[#ffffff] rounded-2xl p-5 mt-10 relative overflow-hidden">
-                    <div
-                      className="grid border-b border-[#00000019] py-3 px-6 text-[#637381] font-medium text-left items-center"
-                      style={{
-                        gridTemplateColumns:
-                          "minmax(200px, 2fr) minmax(150px, 2fr) minmax(150px, 1.5fr) minmax(120px, 1.5fr) minmax(100px, 1fr)",
-                      }}
-                    >
-                      <div className="truncate pr-4">Items</div>
-                      <div className="truncate pr-4">Product</div>
-                      <div className="truncate pr-4">Date</div>
-                      <div className="truncate pr-4">Payment method</div>
-                      <div className="truncate text-right">Amount</div>
-                    </div>
+                  <div className="w-[100vw] lg:w-fit">
+                    <div className="xl:w-fit w-[90vw] m-auto  xl:overflow-x-hidden overflow-x-scroll bg-[#ffffff] rounded-2xl xl:p-5 mt-10 relative ">
+                      <div
+                        className="grid border-b border-[#00000019] py-3 px-6 text-[#637381] font-medium text-left items-center"
+                        style={{
+                          gridTemplateColumns:
+                            "minmax(200px, 2fr) minmax(150px, 2fr) minmax(150px, 1.5fr) minmax(120px, 1.5fr) minmax(100px, 1fr)",
+                        }}
+                      >
+                        <div className="truncate pr-4">Items</div>
+                        <div className="truncate pr-4">Product</div>
+                        <div className="truncate pr-4">Date</div>
+                        <div className="truncate pr-4">Payment method</div>
+                        <div className="truncate text-right">Amount</div>
+                      </div>
 
-                    <div>
-                      {loadingTx ? (
-                        <div className="p-6 text-gray-500">
-                          Loading transactions…
-                        </div>
-                      ) : visibleTransactions.length === 0 ? (
-                        <div className="p-6 text-gray-500">
-                          No transactions found
-                        </div>
-                      ) : (
-                        visibleTransactions.map((account, index) => (
-                          <div
-                            key={account.id ?? index}
-                            className="grid items-center border-b border-[#0000001c] py-4 text-[#1C252E] text-[14px] px-6"
-                            style={{
-                              gridTemplateColumns:
-                                "minmax(200px, 2fr) minmax(150px, 2fr) minmax(150px, 1.5fr) minmax(120px, 1.5fr) minmax(100px, 1fr)",
-                            }}
-                          >
-                            <div className="flex items-center gap-3 overflow-hidden pr-4">
-                              <Image
-                                className="w-[30px] h-[30px] rounded-full flex-shrink-0"
-                                src={account.img}
-                                alt={account.name}
-                                width={30}
-                                height={30}
-                              />
-                              <h3 className="font-bold truncate">
-                                {account.name}
-                              </h3>
-                            </div>
-
-                            <div className="text-[gray] font-[400] truncate pr-4">
-                              {account.product}/M
-                            </div>
-
-                            <div className="text-[gray] font-[400] truncate pr-4">
-                              {account.date}
-                            </div>
-
-                            <div className="text-[gray] font-[400] truncate pr-4">
-                              {account.payment}
-                            </div>
-
-                            <div className="flex items-center justify-end gap-2">
-                              <h3 className="font-bold text-[14px] truncate">
-                                {account.amount}
-                              </h3>
-                            </div>
+                      <div>
+                        {loadingTx ? (
+                          <div className="p-6 text-gray-500">
+                            Loading transactions…
                           </div>
-                        ))
-                      )}
+                        ) : visibleTransactions.length === 0 ? (
+                          <div className="p-6 text-gray-500">
+                            No transactions found
+                          </div>
+                        ) : (
+                          visibleTransactions.map((account, index) => (
+                            <div
+                              key={account.id ?? index}
+                              className="grid items-center border-b border-[#0000001c] py-4 text-[#1C252E] text-[14px] px-6"
+                              style={{
+                                gridTemplateColumns:
+                                  "minmax(200px, 2fr) minmax(150px, 2fr) minmax(150px, 1.5fr) minmax(120px, 1.5fr) minmax(100px, 1fr)",
+                              }}
+                            >
+                              <div className="flex items-center gap-3 overflow-hidden pr-4">
+                                <Image
+                                  className="w-[30px] h-[30px] rounded-full flex-shrink-0"
+                                  src={account.img}
+                                  alt={account.name}
+                                  width={30}
+                                  height={30}
+                                />
+                                <h3 className="font-bold truncate">
+                                  {account.name}
+                                </h3>
+                              </div>
+
+                              <div className="text-[gray] font-[400] truncate pr-4">
+                                {account.product}/M
+                              </div>
+
+                              <div className="text-[gray] font-[400] truncate pr-4">
+                                {account.date}
+                              </div>
+
+                              <div className="text-[gray] font-[400] truncate pr-4">
+                                {account.payment}
+                              </div>
+
+                              <div className="flex items-center justify-end gap-2">
+                                <h3 className="font-bold text-[14px] truncate">
+                                  {account.amount}
+                                </h3>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex items-center justify-between py-3 px-6 text-[#374151] border-t border-[#00000019]">

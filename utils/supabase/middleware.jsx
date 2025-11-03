@@ -72,7 +72,7 @@ export const updateSession = async (request) => {
     }
   }
 
-  const adminPaths = [
+ const adminPaths = [
     "/admin",
     "/Accounts",
     "/AddProducts",

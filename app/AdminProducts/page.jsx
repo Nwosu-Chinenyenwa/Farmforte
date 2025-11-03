@@ -5,6 +5,13 @@ import AdminNav from "../Components/AdminNav";
 import Aside from "../Components/Aside";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiMenuKebab } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import user from "../../public/asset/avatar-CDT9_MFd.jpg";
+import { IoSearchOutline, IoNotificationsSharp } from "react-icons/io5";
+import Link from "next/link";
+import Adminshort from "../Components/Adminshort";
 
 const supabase = createClient();
 
@@ -13,7 +20,9 @@ export default function AdminProducts() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const limit = 9; // number of products per page
+  const [aside, setaside] = useState(false);
+  const [showProfile, setshowProfile] = useState(false);
+  const limit = 9;
 
   useEffect(() => {
     let mounted = true;
@@ -48,16 +57,91 @@ export default function AdminProducts() {
     };
   }, [page]);
 
-  return (
-    <section className="bg-[#e6e8ec] h-[100vh] overflow-y-scroll no-scrollbar">
-      <div className="flex">
-        <Aside />
-        <div>
-          <AdminNav />
+  const router = useRouter();
 
-          <div className="w-[70vw] m-auto">
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error("Error logging out:", error.message);
+        alert("Logout failed. Please try again.");
+      } else {
+        router.push("/Login");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
+  };
+
+  return (
+    <section className="">
+        <div className="flex">
+          {aside && (
+            <div className="xl:hidden">
+              <Aside />
+            </div>
+          )}
+  
+          <div className="hidden xl:block">
+            <Aside />
+          </div>
+  
+          <div>
+            <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
+              <header className="">
+                <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                  <span className="hidden lg:flex items-center gap-3 xl:hidden">
+                    <CiMenuKebab
+                      onClick={() => setaside(!aside)}
+                      className="text-[30px]"
+                    />
+                    <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                      Overview
+                    </h2>
+                  </span>
+                  <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                    Overview
+                  </h2>
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[35px] lg:hidden"
+                  />
+                  <div className="flex items-center gap-3">
+                    <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                      <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                      <input
+                        type="text"
+                        placeholder="Search for something"
+                        className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                      />
+                    </div>
+  
+                    <Link href={"/AdminSetting"}>
+                      <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                    </Link>
+                    <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+  
+                    <div>
+                      <Image
+                        onClick={() => setshowProfile(!showProfile)}
+                        className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                        src={user}
+                        alt="You"
+                      />
+                    </div>
+                  </div>
+                </nav>
+  
+                {showProfile && (
+                <Adminshort/>
+                )}
+              </header>
+            </div>
+
+          <div className="xl:w-[70vw] xl:p-0 p-3 m-auto">
             <div className="py-10 flex flex-col justify-between h-[100vh]">
-              <div className="flex justify-between">
+              <div className="flex justify-between mb-10">
                 <h3 className="text-[#1C252E] text-[24px] font-[700]">
                   Products
                 </h3>
@@ -78,46 +162,54 @@ export default function AdminProducts() {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-wrap gap-8 items-center">
-                    {products.length > 0 ? (
-                      products.map((items, index) => (
-                        <div className="w-[15vw] max-w-[18vw]" key={index}>
-                          <div className="rounded-tl-[10px] rounded-tr-[10px] overflow-hidden relative">
-                            <Image
-                              src={items.image_url || "/placeholder.png"}
-                              alt={items.name}
-                              width={200}
-                              height={200}
-                              className="object-cover w-full h-[200px]"
-                            />
-                            <span className="absolute top-5 right-5 text-[#7A0916] text-[12px] font-[800] bg-[#FFE9D5] rounded-[6px] p-1 px-3">
-                              {items.type || "sale"}
-                            </span>
-                          </div>
-                          <div className="bg-[#209e2f0c] px-3 py-4 rounded-bl-[10px] rounded-br-[10px]">
-                            <h3 className="text-[14px] font-[600] hover:underline transition mb-4">
-                              {items.name}
-                            </h3>
-                            <div className="flex justify-between items-center">
-                              <div className="flex">
-                                <span className="block h-[10px] w-[10px] relative left-1 bg-[#00AB55] rounded-full"></span>
-                                <span className="block h-[10px] w-[10px] bg-black rounded-full"></span>
-                              </div>
-                              <h6 className="text-[16px] font-[600]">
-                                {items.price
-                                  ? `$${parseFloat(items.price).toFixed(2)}`
-                                  : "$0.00"}
-                              </h6>
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-center w-full text-gray-500">
-                        No products found.
-                      </p>
-                    )}
-                  </div>
+                 <div className="flex flex-wrap justify-center gap-6 sm:gap-8 items-center">
+  {products.length > 0 ? (
+    products.map((items, index) => (
+      <div
+        key={index}
+        className="
+          w-[80vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] xl:w-[15vw] 
+          max-w-[320px] 
+          transition-all duration-300
+        "
+      >
+        <div className="rounded-tl-[10px] rounded-tr-[10px] overflow-hidden relative">
+          <Image
+            src={items.image_url || '/placeholder.png'}
+            alt={items.name}
+            width={200}
+            height={200}
+            className="object-cover w-full h-[200px] sm:h-[220px] md:h-[250px]"
+          />
+          <span className="absolute top-3 right-3 sm:top-5 sm:right-5 text-[#7A0916] text-[12px] font-[800] bg-[#FFE9D5] rounded-[6px] p-1 px-3">
+            {items.type || 'sale'}
+          </span>
+        </div>
+
+        <div className="bg-[#209e2f0c] px-3 py-4 rounded-bl-[10px] rounded-br-[10px]">
+          <h3 className="text-[14px] sm:text-[15px] font-[600] hover:underline transition mb-4">
+            {items.name}
+          </h3>
+
+          <div className="flex justify-between items-center">
+            <div className="flex">
+              <span className="block h-[10px] w-[10px] relative left-1 bg-[#00AB55] rounded-full"></span>
+              <span className="block h-[10px] w-[10px] bg-black rounded-full"></span>
+            </div>
+            <h6 className="text-[15px] sm:text-[16px] font-[600]">
+              {items.price
+                ? `$${parseFloat(items.price).toFixed(2)}`
+                : '$0.00'}
+            </h6>
+          </div>
+        </div>
+      </div>
+    ))
+  ) : (
+    <p className="text-center w-full text-gray-500">No products found.</p>
+  )}
+</div>
+
                 )}
               </div>
 

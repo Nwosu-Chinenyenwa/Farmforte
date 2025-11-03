@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState} from "react";
 import logo from "../../public/img/logo-two.png";
 import Image from "next/image";
 import sub1 from "../../public/img/1.jpg";
@@ -140,9 +140,7 @@ export default function Nav() {
 
             {view && (
               <div className="absolute right-0.5 top-15 shadow-sm bg-white w-[23vw] h-[80px] flex items-center justify-center">
-                <Suspense fallback={<div>Loading search...</div>}>
                   <Search />
-                </Suspense>
               </div>
             )}
           </li>

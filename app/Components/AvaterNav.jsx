@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 export default function AvatarNav() {
   const [avatarUrl, setAvatarUrl] = useState(null);
-  const [initials, setInitials] = useState('NC'); // Default fallback
+  const [initials, setInitials] = useState('UR'); 
 
   useEffect(() => {
     async function fetchProfile() {

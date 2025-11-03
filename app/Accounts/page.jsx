@@ -3,18 +3,44 @@ import React, { useEffect, useState, useMemo } from "react";
 import AdminNav from "../Components/AdminNav";
 import Aside from "../Components/Aside";
 import { GoFilter } from "react-icons/go";
-import { IoSearchOutline } from "react-icons/io5";
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiMenuKebab } from "react-icons/ci";
+import { useRouter } from "next/navigation";
+import user from "../../public/asset/avatar-CDT9_MFd.jpg";
+import { IoSearchOutline, IoNotificationsSharp } from "react-icons/io5";
+import Link from "next/link";
+import Adminshort from "../Components/Adminshort";
 
 export default function Page() {
   const [accounts, setAccounts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedIds, setSelectedIds] = useState([]);
   const [page, setPage] = useState(1);
+  const [aside, setaside] = useState(false);
+  const [showProfile, setshowProfile] = useState(false);
+
   const itemsPerPage = 5;
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        console.error("Error logging out:", error.message);
+        alert("Logout failed. Please try again.");
+      } else {
+        router.push("/Login");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
+  };
 
   useEffect(() => {
     async function fetchUsers() {
@@ -30,13 +56,15 @@ export default function Page() {
     fetchUsers();
   }, []);
 
-  const filteredAccounts = useMemo(() => {
-    return accounts.filter(
-      (a) =>
-        a.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        a.company.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [accounts, searchTerm]);
+const filteredAccounts = useMemo(() => {
+  return accounts.filter((a) => {
+    const name = a?.name?.toLowerCase() || "";
+    const company = a?.company?.toLowerCase() || "";
+    const search = searchTerm.toLowerCase();
+    return name.includes(search) || company.includes(search);
+  });
+}, [accounts, searchTerm]);
+
 
   const totalPages = Math.ceil(filteredAccounts.length / itemsPerPage);
   const displayedAccounts = filteredAccounts.slice(
@@ -79,13 +107,69 @@ export default function Page() {
   };
 
   return (
-    <section className="bg-[#e6e8ec] h-[100vh] overflow-y-scroll no-scrollbar">
+    <section className="">
       <div className="flex">
-        <Aside />
-        <div>
-          <AdminNav />
+        {aside && (
+          <div className="xl:hidden">
+            <Aside />
+          </div>
+        )}
 
-          <div className="w-[70vw] m-auto">
+        <div className="hidden xl:block">
+          <Aside />
+        </div>
+
+        <div>
+          <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
+            <header className="">
+              <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                <span className="hidden lg:flex items-center gap-3 xl:hidden">
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[30px]"
+                  />
+                  <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                    Overview
+                  </h2>
+                </span>
+                <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                  Overview
+                </h2>
+                <CiMenuKebab
+                  onClick={() => setaside(!aside)}
+                  className="text-[35px] lg:hidden"
+                />
+                <div className="flex items-center gap-3">
+                  <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                    <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                    <input
+                      type="text"
+                      placeholder="Search for something"
+                      className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                    />
+                  </div>
+
+                  <Link href={"/AdminSetting"}>
+                    <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                  </Link>
+                  <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+
+                  <div>
+                    <Image
+                      onClick={() => setshowProfile(!showProfile)}
+                      className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                      src={user}
+                      alt="You"
+                    />
+                  </div>
+                </div>
+              </nav>
+
+              {showProfile && <Adminshort />}
+            </header>
+          </div>
+
+          <div className="xl:w-[70vw] w-[95vw] m-auto">
             <div className="py-10">
               <div className="flex justify-between">
                 <h3 className="text-[#1C252E] text-[24px] font-[700]">Users</h3>
@@ -117,9 +201,9 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="w-full max-w-[1280px] mt-10 relative">
+                <div className="w-full xl:max-w-[1280px] mt-10 relative overflow-x-auto px-2 sm:px-0">
                   <div
-                    className="grid items-center bg-[#F4F6F8] rounded-[5px] py-4 px-5 text-[#637381] font-medium"
+                    className="min-w-[750px] grid items-center bg-[#F4F6F8] rounded-[5px] py-4 px-5 text-[#637381] font-medium"
                     style={{
                       gridTemplateColumns: "40px 2fr 2fr 1.5fr 1fr 1fr 40px",
                     }}
@@ -145,7 +229,7 @@ export default function Page() {
                     {displayedAccounts.map((account) => (
                       <div
                         key={account.id}
-                        className="grid items-center font-[400] text-left text-[#1C252E] text-[14px] py-4 px-5"
+                        className="min-w-[750px] grid items-center font-[400] text-left text-[#1C252E] text-[14px] py-4 px-5"
                         style={{
                           gridTemplateColumns:
                             "40px 2fr 2fr 1.5fr 1fr 1fr 40px",

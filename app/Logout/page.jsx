@@ -1,13 +1,26 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Aside from "../Components/Aside";
 import AdminNav from "../Components/AdminNav";
 import { createClient } from "@/utils/supabase/client"; 
 import { useRouter } from "next/navigation";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CiMenuKebab } from "react-icons/ci";
+import user from "../../public/asset/avatar-CDT9_MFd.jpg";
+import {
+  IoSearchOutline,
+  IoNotificationsSharp,
+} from "react-icons/io5";
+import Link from "next/link";
+import Image from "next/image";
+import Adminshort from "../Components/Adminshort";
 
 export default function Page() {
   const router = useRouter();
   const supabase = createClient();
+  const [aside, setaside] = useState(false)
+  const [showProfile, setshowProfile] = useState(false);
+
 
   const handleLogout = async () => {
     try {
@@ -25,14 +38,71 @@ export default function Page() {
   };
 
   return (
-    <section className="bg-[#e6e8ec] h-[100vh]">
-      <div className="flex">
-        <Aside />
+  <section className="">
+        <div className="flex">
+          {aside && (
+            <div className="xl:hidden">
+              <Aside />
+            </div>
+          )}
 
-        <div>
-          <AdminNav />
+          <div className="hidden xl:block">
+            <Aside />
+          </div>
 
-          <div className="w-[70vw] m-auto">
+          <div>
+            <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
+              <header className="">
+                <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                  <span className="hidden lg:flex items-center gap-3 xl:hidden">
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[30px]"
+                  />
+                       <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                    Overview
+                  </h2>
+                  </span>
+                  <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                    Overview
+                  </h2>
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[35px] lg:hidden"
+                  />
+                  <div className="flex items-center gap-3">
+                    <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                      <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                      <input
+                        type="text"
+                        placeholder="Search for something"
+                        className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                      />
+                    </div>
+
+                    <Link href={"/AdminSetting"}>
+                      <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                    </Link>
+                    <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+
+                    <div>
+                      <Image
+                        onClick={() => setshowProfile(!showProfile)}
+                        className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                        src={user}
+                        alt="You"
+                      />
+                    </div>
+                  </div>
+                </nav>
+
+                {showProfile && (
+                <Adminshort/>
+                )}
+              </header>
+            </div>
+
+          <div className="xl:w-[70vw] xl:p-0 p-3 m-auto">
             <div className="py-10">
               <div className="flex justify-between">
                 <h3 className="text-[#1C252E] text-[24px] font-[700]">
@@ -73,14 +143,14 @@ export default function Page() {
                   <div className="pt-5 pb-6 px-6 text-right bg-gray-900 -mb-2">
                     <button
                       onClick={() => router.push("/admin")}
-                      className="inline-block w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200"
+                      className="inline-block cursor-pointer w-full sm:w-auto py-3 px-5 mb-2 mr-4 text-center font-semibold leading-6 text-gray-200 bg-gray-500 hover:bg-gray-400 rounded-lg transition duration-200"
                     >
                       Cancel
                     </button>
 
                     <button
                       onClick={handleLogout}
-                      className="inline-block w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-red-500 hover:bg-red-600 rounded-lg transition duration-200"
+                      className="inline-block cursor-pointer w-full sm:w-auto py-3 px-5 mb-2 text-center font-semibold leading-6 text-blue-50 bg-red-500 hover:bg-red-600 rounded-lg transition duration-200"
                     >
                       Logout
                     </button>

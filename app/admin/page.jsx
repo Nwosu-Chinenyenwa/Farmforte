@@ -30,6 +30,7 @@ import {
 } from "recharts";
 
 import { createClient } from "@/utils/supabase/client";
+import Adminshort from "../Components/Adminshort";
 const supabase = createClient();
 
 export default function page() {
@@ -543,7 +544,7 @@ export default function page() {
 
   return (
     <>
-      <section className="bg-[#e6e8ec] md:h-[100vh] lg:h-[100vh]">
+      <section className="">
         <div className="flex">
           {aside && (
             <div className="xl:hidden">
@@ -556,10 +557,10 @@ export default function page() {
           </div>
 
           <div>
-            <div className="xl:w-[80vw] w-[100vw]">
+            <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
               <header className="">
                 <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
-                  <span className="hidden lg:flex items-center gap-3 xl:hidden ">
+                  <span className="hidden lg:flex items-center gap-3 xl:hidden">
                   <CiMenuKebab
                     onClick={() => setaside(!aside)}
                     className="text-[30px]"
@@ -602,71 +603,7 @@ export default function page() {
                 </nav>
 
                 {showProfile && (
-                  <div className="relative z-10">
-                    <div className="absolute top-2 right-10 w-[280px] bg-white rounded-[12px] shadow-md py-4 px-7">
-                      <h3 className="text-[#343c6a] text-[14px] font-[700] mb-3">
-                        User Profile
-                      </h3>
-
-                      <div className="flex items-center gap-5 border-b border-[#e5e7eb] pb-4">
-                        <Image
-                          src={user}
-                          alt="Profile"
-                          width={48}
-                          height={48}
-                          className="rounded-full w-[50px] h-[50px] "
-                        />
-                        <div className="flex flex-col gap-1">
-                          <h6 className="text-[#343c6a] text-[14px] font-[600]">
-                            Charlene Reed
-                          </h6>
-                          <p className="text-[#8ba3cb] text-[12px] font-[500]">
-                            Designer
-                          </p>
-                          <div className="flex items-center gap-1 text-[#8ba3cb] text-[12px]">
-                            <Mail size={12} />
-                            <span>info@dashbank.com</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Link href={"/AdminProfile"}>
-                        <div className="flex items-center gap-2 my-4 cursor-pointer">
-                          <div className="bg-[#e7edff] p-2 rounded-[8px]">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-[20px] h-[20px] text-[#718ebf]"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M5.121 17.804A4 4 0 016 17h12a4 4 0 01.879.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
-                          </div>
-                          <div>
-                            <h6 className="text-[#343c6a] text-[13px] font-[600]">
-                              My Profile
-                            </h6>
-                            <p className="text-[#8ba3cb] text-[12px] font-[500]">
-                              Account Settings
-                            </p>
-                          </div>
-                        </div>
-                      </Link>
-
-                      <button
-                        onClick={handleLogout}
-                        className="w-full border-1 border-[#ff5e5e] text-[#ff5e5e] font-[600] py-2 rounded-full hover:bg-[#ff5e5e17] cursor-pointer  transition"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </div>
+                <Adminshort/>
                 )}
               </header>
             </div>

@@ -5,7 +5,6 @@ import React, {
   useState,
   useCallback,
   useRef,
-  Suspense,
 } from "react";
 
 import logo from "../../public/img/logo-two.png";
@@ -70,7 +69,7 @@ export default function AllNav() {
 
   return (
     <>
-      <section>
+      <section id="nav">
         <header className="xl:mb-0">
           {displayNav ? (
             <div className="hidden lg:block">
@@ -225,9 +224,7 @@ export default function AllNav() {
 
                 {view && (
                   <div className="absolute top-15 left-0 bg-white w-[80vw] h-[60px] flex items-center justify-center">
-                    <Suspense fallback={<div>Loading search...</div>}>
                       <Search />
-                    </Suspense>
                   </div>
                 )}
                 <div>

@@ -3,16 +3,11 @@
 import React, { useRef, useState } from "react";
 
 export default function Search() {
-  const [q, setQ] = useState("");
-  const inputRef = useRef();
 
   return (
     <form className="lg:w-[20vw] h-[40px] p-3 flex text-[#333333] border-1 border-[#209e2e] items-center justify-center">
       <input
         className="outline-0 p-1 placeholder:text-[#616161] w-full"
-        ref={inputRef}
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
         type="text"
         placeholder="Search"
       />
