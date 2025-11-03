@@ -5,6 +5,7 @@ import Nav from "../Components/Nav";
 import pagetitle from "../../public/img/page-title-bg.jpg";
 import rag1 from "../../public/img/shape-2 (1).png";
 import about from "../../public/img/aboutM.jpg";
+import about1 from "../../public/img/about1 (1).png"
 import about2 from "../../public/img/about2.png";
 import about3 from "../../public/img/about3.png";
 import Image from "next/image";
@@ -19,6 +20,10 @@ import Footer from "../Components/Footer";
 import AllNav from "../Components/AllNav";
 import Subcribe from "../Components/Subcribe";
 import Link from "next/link";
+import blog1 from "../../public/asset/blogs1.jpg";
+import blog2 from "../../public/asset/blogs2.jpg";
+import blog3 from "../../public/asset/blogs3.jpg";
+import blog4 from "../../public/asset/blogs4.jpg";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,53 +31,53 @@ export default function page() {
   const features = [
     {
       icon: <FaCogs className="text-[#80b500] text-5xl" />,
-      title: "All Kind of Brands",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.",
+      title: "All Farm Solutions",
+      desc: "We provide modern agricultural tools and smart systems that help farmers improve productivity and sustainability.",
     },
     {
       icon: <FaTools className="text-[#80b500] text-5xl" />,
-      title: "Brake Fluid Exchange",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.",
+      title: "Agro Product Support",
+      desc: "Farmforte ensures proper crop management and soil care with trusted methods that increase long-term farm yields.",
     },
     {
       icon: <FaWrench className="text-[#80b500] text-5xl" />,
-      title: "Maintenance Package",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.",
+      title: "Sustainable Growth",
+      desc: "We promote eco-friendly farming practices and empower local farmers through innovation and agricultural training.",
     },
   ];
 
   const feedbacks = [
     {
       id: 1,
-      name: "Jacob William",
-      role: "Manager",
+      name: "Chinedu Okafor",
+      role: "Farm Manager",
       roleColor: "text-green-600",
-      img: feedBack,
-      text: "Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      img: blog1,
+      text: "Farmforte has transformed the way we manage our crops. Their support and technology made our harvests more efficient than ever before.",
     },
     {
       id: 2,
-      name: "Ethan James",
-      role: "Admin",
+      name: "Aisha Bello",
+      role: "Customer",
       roleColor: "text-green-600",
-      img: feedBack,
-      text: "Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      img: blog3,
+      text: "Working with Farmforte has been inspiring. The team truly understands the needs of local farmers and brings real solutions to the field.",
     },
     {
       id: 3,
-      name: "Sophia Grace",
+      name: "Emeka Uzo",
       role: "Customer",
       roleColor: "text-blue-600",
-      img: feedBack,
-      text: "Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      img: blog2,
+      text: "I ordered farm produce through Farmforte and received fresh, quality goods right on time. Their service is simply outstanding.",
     },
     {
       id: 4,
-      name: "Sophia Grace",
+      name: "Ngozi Adeyemi",
       role: "Customer",
       roleColor: "text-blue-600",
-      img: feedBack,
-      text: "Lorem ipsum dolor sit amet, consectetur adipi sicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      img: blog4,
+      text: "I love how Farmforte supports small farmers and promotes organic produce. Their dedication to quality and growth is unmatched.",
     },
   ];
 
@@ -105,16 +110,15 @@ export default function page() {
                   KNOW ABOUT US
                 </span>
                 <h2 className="text-[25px] rajdhani-light lg:text-[30px] xl:text-[38px] font-[700] text-[#333333]">
-                  The territory might be safe is vegetable easy to get
+                  Our farms ensure fresh vegetables are easy to access safely.
                 </h2>
               </span>
 
               <span className="lg:border-l-1 border-[#7a7e9a]">
                 <p className="leading-[1.8]  xl:text-[14px] lg:pl-10 text-[#7a7e9a] font-[400] text-[16px] lg:max-w-[600px]">
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable.
+                  There are many varieties of fresh vegetables and fruits
+                  available, but the majority are carefully grown, harvested,
+                  and selected to ensure quality and taste.
                 </p>
               </span>
             </div>
@@ -132,18 +136,19 @@ export default function page() {
                     <div>
                       <Image
                         className="w-[90vw]  md:w-[45vw]  xl:w-[20vw] h-auto relative top-2"
-                        src={about2}
+                        src={about1}
                         alt="seller"
                       />
                       <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
                         <li className="flex gap-2 items-center">
                           <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                           <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Pure agro services
+                            Sustainable Agriculture
                           </p>
                         </li>
                         <h3 className="text-[#333333] font-[800]">
-                          Rich in nutrients but no formal or defect
+                          Empowering farmers through innovation and eco-friendly
+                          practices.
                         </h3>
                       </div>
                     </div>
@@ -157,11 +162,12 @@ export default function page() {
                         <li className="flex gap-2 items-center">
                           <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                           <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Pure agro services
+                            Quality Farm Produce
                           </p>
                         </li>
                         <h3 className="text-[#333333] font-[800]">
-                          Rich in nutrients but no formal or defect
+                          Delivering fresh, nutrient rich, and responsibly grown
+                          food for all.
                         </h3>
                       </div>
                     </div>
@@ -175,22 +181,24 @@ export default function page() {
                         <li className="flex gap-2 items-center">
                           <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
                           <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Pure agro services
+                            Agritech Solutions
                           </p>
                         </li>
                         <h3 className="text-[#333333] font-[800]">
-                          Rich in nutrients but no formal or defect
+                          Transforming agriculture with data-driven insights and
+                          smart technology.
                         </h3>
                       </div>
                     </div>
                   </div>
 
                   <h3 className="text-[#333333] text-[25px] p-2 lg:p-0 font-bold">
-                    Life is not like a species do you believe?
+                    Farming is not just growth it's how we nourish the world.
                   </h3>
                   <p className="text-[#7a7e9a] text-[14px] p-2 lg:p-0  lg:text-[16px] font-[400] leading-[1.8]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    dorem ipsum dolor sit amet, consectetur adipiscing.
+                    Farmforte stands for modern agriculture, empowering farmers
+                    and producing quality food for every home and community
+                    around the world.
                   </p>
                   <ul className="flex gap-2 p-2 lg:p-0 flex-col flex-wrap">
                     <span className="flex lg:flex-row flex-col gap-2 lg:gap-5">
@@ -293,7 +301,7 @@ export default function page() {
         </div>
         <div className="w-[90vw] h-[450px]">
           <iframe
-           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.576849635824!2d7.544376273982893!3d5.480959594498789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1042c5a3b597c15f%3A0x9654b1f3cace9baa!2sUmuariaga%20Primary%20School!5e0!3m2!1sen!2sng!4v1761515598894!5m2!1sen!2sng"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.576849635824!2d7.544376273982893!3d5.480959594498789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1042c5a3b597c15f%3A0x9654b1f3cace9baa!2sUmuariaga%20Primary%20School!5e0!3m2!1sen!2sng!4v1761515598894!5m2!1sen!2sng"
             width="100%"
             height="100%"
             style={{ border: 0 }}
@@ -405,18 +413,18 @@ export default function page() {
           modules={[Navigation, Autoplay]}
           navigation
           spaceBetween={30}
-          slidesPerView={1} 
+          slidesPerView={1}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
           breakpoints={{
-            480: { slidesPerView: 1 }, 
-            640: { slidesPerView: 1 }, 
-            768: { slidesPerView: 2 }, 
-            1024: { slidesPerView: 3 }, 
-            1280: { slidesPerView: 3 }, 
-            1536: { slidesPerView: 4 }, 
+            480: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 3 },
+            1536: { slidesPerView: 4 },
           }}
           className="px-5 relative"
         >
@@ -439,15 +447,13 @@ export default function page() {
                   />
                   <div>
                     <p className="hyphens-auto mb-[15px] text-sm sm:text-base">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
+                      {item.text}
                     </p>
                     <h4 className="text-[#071c1f] group-hover:text-white transition mb-[10px] rajdhani-light leading-1.3 font-[700] text-[16px] sm:text-[20px]">
-                      Rosalina D. William
+                      {item.name}
                     </h4>
                     <p className="text-[#7ed957] rajdhani-light font-semibold text-sm sm:text-base">
-                      Founder
+                      {item.role}
                     </p>
                   </div>
                 </div>

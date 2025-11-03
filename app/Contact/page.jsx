@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AllNav from "../Components/AllNav";
 import Footer from "../Components/Footer";
 import Link from "next/link";
@@ -9,6 +9,52 @@ import Subcribe from "../Components/Subcribe";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("Message sent successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        toast.error(data.error || "Failed to send message.");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <section className="pagetitle">
@@ -64,7 +110,7 @@ export default function Contact() {
 
       <section>
         <div>
-          <h3 className="text-[38px] text-[#333333] font-bold mb-[10ppx] text-center  rajdhani-light">
+          <h3 className="lg:text-[38px] text-[25px] text-[#333333] font-bold mb-[10ppx] text-center  rajdhani-light">
             Drop us a message for any query
           </h3>
           <p className="max-w-[605px] m-auto leading-1.8 text-[#7a7e9a] mb-[14px] font-[400] text-[16px] text-center">
@@ -72,16 +118,19 @@ export default function Contact() {
           </p>
         </div>
       </section>
+
       <section>
         <div className="flex items-center justify-center py-10">
           <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-5xl">
-            <form  className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <input
                     type="text"
                     name="name"
                     placeholder="Name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
@@ -90,6 +139,8 @@ export default function Contact() {
                     type="email"
                     name="email"
                     placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full focus:border-2  border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
@@ -101,6 +152,8 @@ export default function Contact() {
                     type="text"
                     name="phone"
                     placeholder="Phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
@@ -109,6 +162,8 @@ export default function Contact() {
                     type="text"
                     name="subject"
                     placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="w-full focus:border-2 border-1 border-[#209e2e] rounded-md p-3 outline-none"
                   />
                 </div>
@@ -119,6 +174,8 @@ export default function Contact() {
                   name="message"
                   placeholder="Your Message"
                   rows="6"
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full focus:border-2  border-1 border-[#209e2e] rounded-md p-3 outline-none"
                 ></textarea>
               </div>
@@ -126,16 +183,18 @@ export default function Contact() {
               <div className="flex justify-center">
                 <button
                   type="submit"
+                  disabled={loading}
                   className="bg-green-600 cursor-pointer hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-full"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </form>
           </div>
         </div>
       </section>
-      <Toaster/>
+
+      <Toaster />
       <Subcribe />
       <Footer />
     </>

@@ -26,8 +26,7 @@ Name: ${name}
 Email: ${email}
 Phone: ${phone || "Not provided"}
 Subject: ${subject || "No subject"}
-Message:
-${message}
+Message:${message}
       `,
     });
 

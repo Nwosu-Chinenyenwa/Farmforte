@@ -54,8 +54,8 @@ export default function Subcribe() {
           className="lg:flex lg:items-center lg:justify-center lg:gap-3 w-full"
         >
           <input
-            className="flex-1 lg:w-auto lg:border lg:border-dashed border-[#209e2e] h-[55px] outline-0 pl-[25px] bg-white text-[#333333] rounded-4xl"
-            type="text"
+            className="flex-1 lg:w-auto lg:border lg:border-dashed border-[#209e2e] h-[55px] outline-0 pl-[25px] bg-white lg:bg-transparent text-[#333333] w-full rounded-4xl"
+            type="text  "
             placeholder="Enter Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
