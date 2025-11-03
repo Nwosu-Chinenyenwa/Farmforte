@@ -397,7 +397,7 @@ export default function page() {
         <p className="rajdhani-light text-center text-[#80b500] text-[16px] leading-1.3 font-[700]">
           TESTIMONIAL
         </p>
-        <h2 className="text-center rajdhani-light text-[50px] text-[#071c1f] leading-1.2 font-[700] mb-10">
+        <h2 className="text-center rajdhani-light text-[30px] lg:text-[50px] text-[#071c1f] leading-1.2 font-[700] mb-10">
           Customer Feedback
         </h2>
 
@@ -405,18 +405,18 @@ export default function page() {
           modules={[Navigation, Autoplay]}
           navigation
           spaceBetween={30}
-          slidesPerView={1} // default for very small screens
+          slidesPerView={1} 
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
           breakpoints={{
-            480: { slidesPerView: 1 }, // extra small phones
-            640: { slidesPerView: 1 }, // small phones
-            768: { slidesPerView: 2 }, // tablets
-            1024: { slidesPerView: 3 }, // small laptops
-            1280: { slidesPerView: 3 }, // desktops
-            1536: { slidesPerView: 4 }, // very large screens
+            480: { slidesPerView: 1 }, 
+            640: { slidesPerView: 1 }, 
+            768: { slidesPerView: 2 }, 
+            1024: { slidesPerView: 3 }, 
+            1280: { slidesPerView: 3 }, 
+            1536: { slidesPerView: 4 }, 
           }}
           className="px-5 relative"
         >

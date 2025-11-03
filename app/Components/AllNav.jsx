@@ -16,6 +16,7 @@ import sub7 from "../../public/img/7.jpg";
 import sub8 from "../../public/img/8.jpg";
 import { usePathname } from "next/navigation";
 import logo2 from "../../public/download.png";
+import logo1 from "../../public/asset/FARMFORTE 5.jpg";
 import Nav from "./Nav";
 import Cart from "./Cart";
 import AvatarNav from "./AvaterNav";
@@ -88,7 +89,7 @@ export default function AllNav() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const Scroll = () => {
-      if (window.scrollY > 5) {
+      if (window.scrollY > 30) {
         sethamburga(false);
       }
     };
@@ -252,7 +253,7 @@ export default function AllNav() {
 
           <section className="flex z-10 lg:hidden flex-col relative">
             <nav className="flex z-10 fixed px-5 w-[100vw] bg-white justify-between items-center p-3">
-              <Image src={logo2} alt="logo" />
+              <Image className="md:w-[18vw] w-[28vw] h-[5vh] md:h-[5vh] rounded-bl-3xl" src={logo1} alt="logo" />
 
               <div className="flex items-center gap-2">
                 <svg
@@ -408,6 +409,9 @@ export default function AllNav() {
                         </svg>
                       </li>
                     </Link>
+
+                    <AdminLink/>
+                     
                     <Link href={"/Login"}>
                       <li className="flex  justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
                         <p className="text-[#82b440]">Login now!</p>

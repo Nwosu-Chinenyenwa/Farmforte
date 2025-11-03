@@ -301,7 +301,7 @@ export default function page() {
                     Healthy living starts with fresh produce.
                   </h1>
                   <p className="text-white">
-                    Discover fresh, farm-grown fruits and vegetables delivered
+                    Discover fresh, farm grown fruits and vegetables delivered
                     straight to your home. Taste the difference of natural,
                     healthy produce harvested with care for your family.
                   </p>
