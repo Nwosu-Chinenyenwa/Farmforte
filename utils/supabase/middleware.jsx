@@ -44,7 +44,7 @@ export const updateSession = async (request) => {
     console.error("Middleware session fetch failed:", err.message);
   }
 
-  const pathname = request.nextUrl.pathname;
+/*   const pathname = request.nextUrl.pathname;
 
   const isLoginPage = pathname.startsWith("/Login");
   const isResetPage = pathname === "/ResetPassword";
@@ -57,6 +57,23 @@ export const updateSession = async (request) => {
   if (!user && protectedUserRoutes.some((path) => pathname.startsWith(path))) {
     return NextResponse.redirect(new URL("/Login", request.url));
   }
+ */
+
+  const pathname = request.nextUrl.pathname;
+  const isNewPasswordPage = pathname === "/ResetPassword";
+
+  if (user && pathname.startsWith("/Login") && !isNewPasswordPage) {
+    return NextResponse.redirect(new URL("/Home", request.url));
+  }
+
+  if (!user && (pathname.startsWith("/Checkout") || pathname.startsWith("/Profile"))) {
+    return NextResponse.redirect(new URL("/Login", request.url));
+  }
+
+  if (!user && (pathname.startsWith("/ResetPassword") || pathname.startsWith("/Profile"))) {
+    return NextResponse.redirect(new URL("/Login", request.url));
+  }
+
 
   let isAdmin = false;
 

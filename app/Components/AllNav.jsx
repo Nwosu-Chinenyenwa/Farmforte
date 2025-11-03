@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 
 import logo from "../../public/img/logo-two.png";
 import Link from "next/link";
@@ -25,6 +20,7 @@ import Nav from "./Nav";
 import Cart from "./Cart";
 import AvatarNav from "./AvaterNav";
 import AdminLink from "./AdminLink";
+import { createClient } from "../../utils/supabase/client";
 
 export default function AllNav() {
   const [view, setview] = useState(false);
@@ -32,6 +28,57 @@ export default function AllNav() {
   const [hamburga, sethamburga] = useState(false);
   const [displayNav, setdisplayNav] = useState(false);
   const [main, setmain] = useState(true);
+
+  const [cartCount, setCartCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    async function fetchCartCount() {
+      setIsLoading(true);
+      try {
+        const res = await supabase.auth.getUser();
+        if (res.error) throw res.error;
+
+        const user = res?.data?.user || null;
+
+        if (user) {
+          const { data, error } = await supabase
+            .from("cart_items")
+            .select("quantity")
+            .eq("user_id", user.id);
+
+          if (error) throw error;
+
+          const total = (data || []).reduce(
+            (sum, item) => sum + (item.quantity || 0),
+            0
+          );
+          setCartCount(total);
+        } else {
+          setCartCount(0);
+        }
+      } catch (err) {
+        console.error("Error fetching cart count:", err);
+        setCartCount(0);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchCartCount();
+
+    const interval = setInterval(fetchCartCount, 10000);
+
+    const handleStorageChange = () => fetchCartCount();
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   const search = () => setview(!view);
   let hamtoggle = useCallback(() => {
@@ -163,7 +210,7 @@ export default function AllNav() {
                         SignUp
                       </li>
                     </Link>
-                      <AdminLink/>
+                    <AdminLink />
                   </ul>
                 </li>
               </ul>
@@ -205,7 +252,7 @@ export default function AllNav() {
 
           <section className="flex z-10 lg:hidden flex-col relative">
             <nav className="flex z-10 fixed px-5 w-[100vw] bg-white justify-between items-center p-3">
-              <Image src={logo} alt="logo" />
+              <Image src={logo2} alt="logo" />
 
               <div className="flex items-center gap-2">
                 <svg
@@ -220,7 +267,7 @@ export default function AllNav() {
 
                 {view && (
                   <div className="absolute top-15 left-0 bg-white w-[80vw] h-[60px] flex items-center justify-center">
-                      <Search />
+                    <Search />
                   </div>
                 )}
                 <div>
@@ -235,7 +282,11 @@ export default function AllNav() {
                     </svg>
 
                     <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-[#82b440] rounded-full">
-                      0
+                      {isLoading ? (
+                        <span className="animate-pulse">...</span>
+                      ) : (
+                        cartCount
+                      )}
                     </span>
                   </li>
                 </div>
