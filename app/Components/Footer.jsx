@@ -212,9 +212,9 @@ export default function Footer() {
 
           <div className="lg:flex text-center  justify-between text-[#ffffff] w-[90vw] py-10 text-[14px] font-[600]">
             <p>
-              Copyright @ {year} Trifles. All Rights Reserved by{" "}
+              Copyright @ {year} farmforte. All Rights Reserved by{" "}
               <a className="font-[900]" href="">
-                EnvyTheme
+                FARMFORTE
               </a>
             </p>
             <ul className="flex gap-3 mt-3 lg:mt-0 text-center items-center justify-center">
