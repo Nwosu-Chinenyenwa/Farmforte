@@ -4,7 +4,7 @@ import React from "react";
 import Nav from "../Components/Nav";
 import pagetitle from "../../public/img/page-title-bg.jpg";
 import rag1 from "../../public/img/shape-2 (1).png";
-import about from "../../public/img/aboutM.jpg";
+import about from "../../public/img/admin.jpg";
 import about1 from "../../public/img/about1 (1).png"
 import about2 from "../../public/img/about2.png";
 import about3 from "../../public/img/about3.png";
@@ -125,72 +125,71 @@ export default function page() {
 
             <div className="flex flex-col lg:flex-row md:gap-0 gap-10 xl:gap-10 lg:gap-5 justify-center items-center">
               <Image
-                className="w-[90vw] lg:w-[43vw] xl:w-[40vw]"
+                className="w-[90vw] lg:w-[40vw] lg:h-[50vh] xl:h-[90vh] xl:w-[40vw]"
                 src={about}
                 alt="seller"
               />
 
               <div className="xl:w-[40vw] lg:w-[50vw] p-2 xl:p-0  lg:p-0">
                 <div className="flex flex-col gap-3 ">
-                  <div className="flex lg:w-[50vw] xl:w-[40vw] w-[95vw] md:w-[90vw] lg:justify-start justify-center items-center gap-3 overflow-x-scroll no-scrollbar">
-                    <div>
-                      <Image
-                        className="w-[90vw]  md:w-[45vw]  xl:w-[20vw] h-auto relative top-2"
-                        src={about1}
-                        alt="seller"
-                      />
-                      <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                        <li className="flex gap-2 items-center">
-                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Sustainable Agriculture
-                          </p>
-                        </li>
-                        <h3 className="text-[#333333] font-[800]">
-                          Empowering farmers through innovation and eco-friendly
-                          practices.
-                        </h3>
-                      </div>
-                    </div>
-                    <div>
-                      <Image
-                        className="w-[90vw] md:w-[45vw]  lg:w-[20vw] h-auto relative top-2"
-                        src={about2}
-                        alt="seller"
-                      />
-                      <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                        <li className="flex gap-2 items-center">
-                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Quality Farm Produce
-                          </p>
-                        </li>
-                        <h3 className="text-[#333333] font-[800]">
-                          Delivering fresh, nutrient rich, and responsibly grown
-                          food for all.
-                        </h3>
-                      </div>
-                    </div>
-                    <div>
-                      <Image
-                        className="w-[90vw]  md:w-[45vw]  lg:w-[20vw] h-auto relative top-2"
-                        src={about3}
-                        alt="seller"
-                      />
-                      <div className="w-[90vw]  md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2">
-                        <li className="flex gap-2 items-center">
-                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-                            Agritech Solutions
-                          </p>
-                        </li>
-                        <h3 className="text-[#333333] font-[800]">
-                          Transforming agriculture with data-driven insights and
-                          smart technology.
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
+               <div className="flex lg:w-[50vw] xl:w-[40vw] w-[95vw] md:w-[90vw] lg:justify-start justify-center items-center gap-3 overflow-x-scroll no-scrollbar">
+  <div>
+    <Image
+      className="w-[90vw] md:w-[45vw] xl:w-[20vw] h-auto relative top-2"
+      src={about1}
+      alt="seller"
+    />
+    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
+      <li className="flex gap-2 items-center">
+        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+          Sustainable Agriculture
+        </p>
+      </li>
+      <h3 className="text-[#333333] font-[800]">
+        Empowering farmers through innovation and eco-friendly practices.
+      </h3>
+    </div>
+  </div>
+
+  <div>
+    <Image
+      className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
+      src={about2}
+      alt="seller"
+    />
+    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
+      <li className="flex gap-2 items-center">
+        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+          Quality Farm Produce
+        </p>
+      </li>
+      <h3 className="text-[#333333] font-[800]">
+        Delivering fresh, nutrient rich, and responsibly grown food for all.
+      </h3>
+    </div>
+  </div>
+
+  <div>
+    <Image
+      className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
+      src={about3}
+      alt="seller"
+    />
+    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px]">
+      <li className="flex gap-2 items-center">
+        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+          Agritech Solutions
+        </p>
+      </li>
+      <h3 className="text-[#333333] font-[800]">
+        Transforming agriculture with data-driven insights 
+      </h3>
+    </div>
+  </div>
+</div>
 
                   <h3 className="text-[#333333] text-[25px] p-2 lg:p-0 font-bold">
                     Farming is not just growth it's how we nourish the world.
