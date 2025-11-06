@@ -360,7 +360,7 @@ export default function Shop() {
 
       <section className="mt-10 py-30 flex flex-col items-center justify-center gap-0 lg:gap-3">
         <p className="text-[#209e2e] text-center lg:text-[15px] font-[400] text-[14px]">
-          Welcome TO OUR SHOP
+          WELCOME TO OUR SHOP
         </p>
         <h2 className="text-[38px] text-center font-[700] text-[#333333]">
           Buy our product

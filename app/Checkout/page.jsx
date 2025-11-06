@@ -458,7 +458,7 @@ const openPaystackPopup = (amountNGN = 0, customerEmail = "", customerName = "",
                       <p className="rajdhani-light font-[700]">{item.name}</p>
                     </span>
                     <p className="text-[#666666] font-[500]">
-                      $
+                      ₦
                       {(
                         (item.unit_price ?? item.price ?? 0) *
                         (item.quantity ?? 1)
@@ -471,11 +471,11 @@ const openPaystackPopup = (amountNGN = 0, customerEmail = "", customerName = "",
               <div className="text-[#333333] text-[14px] mt-5 flex flex-col gap-5">
                 <span className="flex justify-between">
                   <p>Subtotal · {cartItems.length} items</p>
-                  <p className="text-[#666666]">${subtotal.toFixed(2)}</p>
+                  <p className="text-[#666666]">₦{subtotal.toFixed(2)}</p>
                 </span>
                 <span className="flex justify-between">
                   <p>Shipping</p>
-                  <p className="text-[#666666]">${shipping.toFixed(2)}</p>
+                  <p className="text-[#666666]">₦{shipping.toFixed(2)}</p>
                 </span>
                 <span className="flex justify-between">
                   <h3 className="font-bold text-[20px] rajdhani-light">
@@ -483,9 +483,9 @@ const openPaystackPopup = (amountNGN = 0, customerEmail = "", customerName = "",
                   </h3>
                   <p>
                     <span className="font-extralight text-[#0000004e]">
-                      USD
+                      NGN
                     </span>{" "}
-                    ${total.toFixed(2)}
+                    ₦{total.toFixed(2)}
                   </p>
                 </span>
 

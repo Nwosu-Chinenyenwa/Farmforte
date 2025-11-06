@@ -231,7 +231,7 @@ export default function Page() {
                     </td>
 
                     <td className="text-[#666666] font-semibold sm:font-bold px-3 sm:px-4 py-2">
-                      {"$" +
+                      {"₦" +
                         formatMoney(product.unit_price ?? product.price ?? 0)}
                     </td>
 
@@ -273,7 +273,7 @@ export default function Page() {
                     <td className="px-3 sm:px-4 py-2">
                       <div className="flex gap-3 sm:gap-5 items-center justify-center">
                         <p className="text-[#666666] font-bold text-[15px] sm:text-[17px]">
-                          {"$" +
+                          {"₦" +
                             formatMoney(
                               Number(
                                 (product.unit_price ?? product.price) || 0
@@ -316,7 +316,7 @@ export default function Page() {
                     Subtotal
                   </td>
                   <td className="py-3 px-3 text-[16px] text-right text-[#666666] font-normal">
-                    {"$" + formatMoney(subtotal)}
+                    {"₦" + formatMoney(subtotal)}
                   </td>
                 </tr>
                 <tr
@@ -327,7 +327,7 @@ export default function Page() {
                     Shipping
                   </td>
                   <td className="py-3 px-3 text-[16px] text-right text-[#666666] font-normal">
-                    {"$" + formatMoney(shipping)}
+                    {"₦" + formatMoney(shipping)}
                   </td>
                 </tr>
 
@@ -336,7 +336,7 @@ export default function Page() {
                     Total
                   </td>
                   <td className="py-5 px-3 text-[16px] font-bold text-right text-[#333333]">
-                    {"$" + formatMoney(total)}
+                    {"₦" + formatMoney(total)}
                   </td>
                 </tr>
               </tbody>

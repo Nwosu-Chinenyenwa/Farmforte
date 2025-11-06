@@ -50,9 +50,9 @@ export default function Footer() {
         <div className="w-[90vw] flex flex-col items-center justify-center">
           <div className="text-white  flex-col lg:flex lg:flex-row m-auto border-b-1 border-dashed pb-[50px] border-[#209e2e] justify-center gap-10">
             <ul className="lg:w-[25%] max-w-[100%]">
-              <h3 className="text-[20px] font-bold mb-[30px]">About Trifles</h3>
+              <h3 className="text-[20px] font-bold mb-[30px]">About Farmforte</h3>
               <p className="leading-[25px] text-[16px] font-[400] mb-[18px]">
-                Trifles focuses on modern cultivation methods that connect
+                Farmforte focuses on modern cultivation methods that connect
                 farmers, buyers, and markets through innovative digital
                 solutions built for sustainable growth and productivity.
               </p>

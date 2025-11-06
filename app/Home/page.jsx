@@ -27,7 +27,7 @@ import about1 from "../../public/img/about1 (1).png";
 import about2 from "../../public/img/about2.png";
 import about3 from "../../public/img/about3.png";
 import rag1 from "../../public/img/shape-2 (1).png";
-import about from "../../public/img/aboutM.jpg";
+import about from "../../public/img/admin.jpg";
 import Image from "next/image";
 import eggplant from "../../public/img/eggplant.png";
 import milk from "../../public/img/milk.png";
@@ -481,7 +481,7 @@ export default function page() {
 
               <div className="flex flex-col lg:flex-row md:gap-0 gap-10 xl:gap-10 lg:gap-5 justify-center items-center">
                 <Image
-                  className="w-[90vw] lg:w-[43vw] xl:w-[40vw]"
+                  className="w-[90vw] lg:w-[40vw] lg:h-[50vh] xl:h-[90vh] xl:w-[40vw]"
                   src={about}
                   alt="seller"
                 />
@@ -726,29 +726,33 @@ export default function page() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-2 lg:gap-5 items-center">
-            <button className="bg-[#209e2e] mt-10 px-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
-              <p className="font-medium lg:text-[17px]">See Cow Farm</p>
-              <svg
-                className="w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-              </svg>
-            </button>
+            <Link href={"/Shop"}>
+              <button className="bg-[#209e2e] mt-10 px-5 w-fit flex justify-center items-center lg:px-8 gap-1 text-white cursor-pointer transition p-3 rounded-4xl hover:bg-white hover:text-[#209e2e] border-1 border-[#209e2e]">
+                <p className="font-medium lg:text-[17px]">See Cow Farm</p>
+                <svg
+                  className="w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+              </button>
+            </Link>
 
-            <button className="bg-[#ffdd9b] mt-10 w-fit px-5 flex justify-center items-center lg:px-8 gap-1 text-[#5c5b5a] border-1 border-[#5a5959] cursor-pointer transition p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
-              <p className="font-medium lg:text-[17px]">See Fish Farm</p>
-              <svg
-                className="w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-              </svg>
-            </button>
+            <Link href={"/Shop"}>
+              <button className="bg-[#ffdd9b] mt-10 w-fit px-5 flex justify-center items-center lg:px-8 gap-1 text-[#5c5b5a] border-1 border-[#5a5959] cursor-pointer transition p-3 rounded-4xl hover:bg-[#209e2e] hover:text-white">
+                <p className="font-medium lg:text-[17px]">See Fish Farm</p>
+                <svg
+                  className="w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+              </button>
+            </Link>
           </div>
 
           <Image className="mt-10" src={cowimg} alt="cow" />

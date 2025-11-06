@@ -5,12 +5,12 @@ import Nav from "../Components/Nav";
 import pagetitle from "../../public/img/page-title-bg.jpg";
 import rag1 from "../../public/img/shape-2 (1).png";
 import about from "../../public/img/admin.jpg";
-import about1 from "../../public/img/about1 (1).png"
+import about1 from "../../public/img/about1 (1).png";
 import about2 from "../../public/img/about2.png";
 import about3 from "../../public/img/about3.png";
 import Image from "next/image";
-import team1 from "../../public/img/1_180x.avif";
-import team2 from "../../public/img/2_180x.webp";
+import team1 from "../../public/img/ceo.jpg";
+import team2 from "../../public/img/developer.png";
 import team3 from "../../public/img/3_180x.avif";
 import feedBack from "../../public/img/6_370x.webp";
 import { FaCogs, FaTools, FaWrench } from "react-icons/fa";
@@ -132,64 +132,66 @@ export default function page() {
 
               <div className="xl:w-[40vw] lg:w-[50vw] p-2 xl:p-0  lg:p-0">
                 <div className="flex flex-col gap-3 ">
-               <div className="flex lg:w-[50vw] xl:w-[40vw] w-[95vw] md:w-[90vw] lg:justify-start justify-center items-center gap-3 overflow-x-scroll no-scrollbar">
-  <div>
-    <Image
-      className="w-[90vw] md:w-[45vw] xl:w-[20vw] h-auto relative top-2"
-      src={about1}
-      alt="seller"
-    />
-    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
-      <li className="flex gap-2 items-center">
-        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-          Sustainable Agriculture
-        </p>
-      </li>
-      <h3 className="text-[#333333] font-[800]">
-        Empowering farmers through innovation and eco-friendly practices.
-      </h3>
-    </div>
-  </div>
+                  <div className="flex lg:w-[50vw] xl:w-[40vw] w-[95vw] md:w-[90vw] lg:justify-start justify-center items-center gap-3 overflow-x-scroll no-scrollbar">
+                    <div>
+                      <Image
+                        className="w-[90vw] md:w-[45vw] xl:w-[20vw] h-auto relative top-2"
+                        src={about1}
+                        alt="seller"
+                      />
+                      <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
+                        <li className="flex gap-2 items-center">
+                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                            Sustainable Agriculture
+                          </p>
+                        </li>
+                        <h3 className="text-[#333333] font-[800]">
+                          Empowering farmers through innovation and eco-friendly
+                          practices.
+                        </h3>
+                      </div>
+                    </div>
 
-  <div>
-    <Image
-      className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
-      src={about2}
-      alt="seller"
-    />
-    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
-      <li className="flex gap-2 items-center">
-        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-          Quality Farm Produce
-        </p>
-      </li>
-      <h3 className="text-[#333333] font-[800]">
-        Delivering fresh, nutrient rich, and responsibly grown food for all.
-      </h3>
-    </div>
-  </div>
+                    <div>
+                      <Image
+                        className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
+                        src={about2}
+                        alt="seller"
+                      />
+                      <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px] ">
+                        <li className="flex gap-2 items-center">
+                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                            Quality Farm Produce
+                          </p>
+                        </li>
+                        <h3 className="text-[#333333] font-[800]">
+                          Delivering fresh, nutrient rich, and responsibly grown
+                          food for all.
+                        </h3>
+                      </div>
+                    </div>
 
-  <div>
-    <Image
-      className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
-      src={about3}
-      alt="seller"
-    />
-    <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px]">
-      <li className="flex gap-2 items-center">
-        <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
-        <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
-          Agritech Solutions
-        </p>
-      </li>
-      <h3 className="text-[#333333] font-[800]">
-        Transforming agriculture with data-driven insights 
-      </h3>
-    </div>
-  </div>
-</div>
+                    <div>
+                      <Image
+                        className="w-[90vw] md:w-[45vw] lg:w-[20vw] h-auto relative top-2"
+                        src={about3}
+                        alt="seller"
+                      />
+                      <div className="w-[90vw] md:w-[45vw] lg:w-[20vw] border-1 border-dashed border-t-0 py-5 px-3 rounded-sm border-[#209e2e] bg-[#fdfdfd] flex flex-col item-center gap-2 h-[160px]">
+                        <li className="flex gap-2 items-center">
+                          <p className="bg-[#209e2e] rounded-4xl block w-3 h-3"></p>
+                          <p className="text-[#209e2e] text-[15px] leading-1 font-[500]">
+                            Agritech Solutions
+                          </p>
+                        </li>
+                        <h3 className="text-[#333333] font-[800]">
+                          Transforming agriculture with data-driven insights
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
 
                   <h3 className="text-[#333333] text-[25px] p-2 lg:p-0 font-bold">
                     Farming is not just growth it's how we nourish the world.
@@ -346,16 +348,15 @@ export default function page() {
         <div>
           <div className="flex flex-wrap items-center justify-center gap-10">
             <div className="w-fit group hover:bg-[#071c1f] transition items-center justify-center md:shadow-lg px-10 py-15 flex flex-col text-center">
-              <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
+                <div className="w-[40vw] h-[30vh] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
                 <Image
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
                   src={team1}
                   alt="team1"
                 />
               </div>
-
               <h6 className="text-[#80b500] mb-[15px] rajdhani-light leading-1.3 font-[700] text-[16px]">
-                CEO/FOUNDER
+                FOUNDER
               </h6>
 
               <h4 className="text-[#071c1f] group-hover:text-white transition mb-[15px] rajdhani-light leading-1.3 font-[700] text-[20px]">
@@ -363,7 +364,7 @@ export default function page() {
               </h4>
             </div>
             <div className="w-fit group hover:bg-[#071c1f] transition md:shadow-lg px-10 py-15 flex flex-col text-center  items-center justify-center">
-              <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
+              <div className="w-[40vw] h-[30vh] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
                 <Image
                   className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
                   src={team2}
@@ -372,28 +373,11 @@ export default function page() {
               </div>
 
               <h6 className="text-[#80b500] mb-[15px] rajdhani-light leading-1.3 font-[700] text-[16px]">
-                Developer
+               Web Developer
               </h6>
 
               <h4 className="text-[#071c1f] group-hover:text-white transition mb-[15px] rajdhani-light leading-1.3 font-[700] text-[20px]">
-                Nwosu Chinenyenwa
-              </h4>
-            </div>
-            <div className="w-fit group hover:bg-[#071c1f] transition md:shadow-lg px-10 py-15 flex flex-col text-center items-center justify-center">
-              <div className="w-[40vw] sm:w-[30vw] md:w-[20vw] lg:w-[15vw] aspect-square flex items-center justify-center mb-[30px]">
-                <Image
-                  className="w-full h-full object-cover rounded-full group-hover:scale-110 transition"
-                  src={team3}
-                  alt="team1"
-                />
-              </div>
-
-              <h6 className="text-[#80b500] mb-[15px] rajdhani-light leading-1.3 font-[700] text-[16px]">
-                CEO/FOUNDER
-              </h6>
-
-              <h4 className="text-[#071c1f] group-hover:text-white transition mb-[15px] rajdhani-light leading-1.3 font-[700] text-[20px]">
-                Nwosu C. Emmanuel
+                Nc.Tech
               </h4>
             </div>
           </div>

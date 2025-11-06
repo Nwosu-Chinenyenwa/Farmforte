@@ -56,10 +56,10 @@ export default function AdminLink() {
     <>
       <Link href="/admin">
         <li className="hidden lg:block hover:text-[#82b440] transition-all hover:ml-1">
-          admin
+          Admin
         </li>
         <li className="flex lg:hidden justify-between p-3 rounded-sm border-b-1 border-[#8080803f] ">
-          <p className="text-[#82b440]">admin</p>
+          <p className="text-[#82b440]">Admin</p>
 
           <svg
             className="w-6 text-[gray]"
