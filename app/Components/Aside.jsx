@@ -20,12 +20,12 @@ export default function Aside() {
     <>
       {show && (
         <aside className="xl:w-[20vw] w-[100vw] h-[100vh] z-20 lg:absolute xl:relative">
-          <div className="border-r-1 fixed bg-[#ffffff] lg:w-[30vw] border-[#dfeaf2] xl:w-[20vw] overflow-x-scroll no-scrollbar h-[100vh] inter text-[15px] p-5">
+          <div className="border-r-1 w-[100vw] fixed bg-[#ffffff] lg:w-[30vw] border-[#dfeaf2] xl:w-[20vw] overflow-x-scroll no-scrollbar h-[100vh] inter text-[15px] p-5">
             <div>
               <Image
                 src={logo2}
                 alt="Logo"
-                className="xl:w-[15vw] lg:h-[9vh] rounded-bl-3xl"
+                className="xl:w-[15vw] lg:h-[9vh] w-[vw] rounded-bl-3xl"
               />
               <IoClose
                 onClick={() => setshow(!show)}
