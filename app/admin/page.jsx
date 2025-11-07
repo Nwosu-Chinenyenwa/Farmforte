@@ -535,7 +535,7 @@ export default function page() {
         console.error("Error logging out:", error.message);
         alert("Logout failed. Please try again.");
       } else {
-        console.log("router.push to loging")
+        console.log("router.push to loging");
       }
     } catch (err) {
       console.error("Unexpected error:", err);
@@ -561,13 +561,13 @@ export default function page() {
               <header className="">
                 <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
                   <span className="hidden lg:flex items-center gap-3 xl:hidden">
-                  <CiMenuKebab
-                    onClick={() => setaside(!aside)}
-                    className="text-[30px]"
-                  />
-                       <h2 className="text-[#343c6a] font-[600] text-[28px]">
-                    Overview
-                  </h2>
+                    <CiMenuKebab
+                      onClick={() => setaside(!aside)}
+                      className="text-[30px]"
+                    />
+                    <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                      Overview
+                    </h2>
                   </span>
                   <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
                     Overview
@@ -602,9 +602,7 @@ export default function page() {
                   </div>
                 </nav>
 
-                {showProfile && (
-                <Adminshort/>
-                )}
+                {showProfile && <Adminshort />}
               </header>
             </div>
 
@@ -815,12 +813,18 @@ export default function page() {
                               tickLine={false}
                               tick={{ fill: "#9ca3af" }}
                             />
-                            <Tooltip />
+                            <Tooltip
+                              formatter={(value, name) => {
+                                if (name === "users") return null;
+                                return [value, "Earning"];
+                              }}
+                              labelFormatter={(label) => `Month: ${label}`}
+                            />
 
                             <Line
                               type="monotone"
                               dataKey="earning"
-                              stroke="#1C4532"
+                              stroke="#ec4899"
                               strokeWidth={3}
                               dot={{ r: 4 }}
                               activeDot={{ r: 6 }}
@@ -828,7 +832,7 @@ export default function page() {
                             <Line
                               type="monotone"
                               dataKey="users"
-                              stroke="#ec4899"
+                              stroke="#1C4532"
                               strokeWidth={2}
                               dot={false}
                             />

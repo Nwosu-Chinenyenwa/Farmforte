@@ -38,7 +38,7 @@ export default function Page() {
   };
 
   return (
-  <section className="">
+  <section className="h-fit overflow-y-hidden lg:h-fit">
         <div className="flex">
           {aside && (
             <div className="xl:hidden">

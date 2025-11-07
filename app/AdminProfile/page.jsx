@@ -124,7 +124,7 @@ export default function Page() {
     );
 
   return (
-    <section className="">
+    <section className="h-fit  lg:h-fit w-[100vw] overflow-hidden">
       <div className="flex">
         {aside && (
           <div className="xl:hidden">

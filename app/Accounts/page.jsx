@@ -107,7 +107,7 @@ const filteredAccounts = useMemo(() => {
   };
 
   return (
-    <section className="">
+    <section className="h-[100vh] overflow-y-hidden lg:h-fit">
       <div className="flex">
         {aside && (
           <div className="xl:hidden">
@@ -119,55 +119,57 @@ const filteredAccounts = useMemo(() => {
           <Aside />
         </div>
 
-        <div>
-          <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
-            <header className="">
-              <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
-                <span className="hidden lg:flex items-center gap-3 xl:hidden">
+      <div>
+            <div className="xl:w-[80vw] border-b-[#dfeaf2] border-1 w-[100vw]">
+              <header className="">
+                <nav className="bg-[#ffffff] flex justify-between py-5 px-5 lg:px-7 items-center">
+                  <span className="hidden lg:flex items-center gap-3 xl:hidden">
                   <CiMenuKebab
                     onClick={() => setaside(!aside)}
                     className="text-[30px]"
                   />
-                  <h2 className="text-[#343c6a] font-[600] text-[28px]">
+                       <h2 className="text-[#343c6a] font-[600] text-[28px]">
                     Overview
                   </h2>
-                </span>
-                <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
-                  Overview
-                </h2>
-                <CiMenuKebab
-                  onClick={() => setaside(!aside)}
-                  className="text-[35px] lg:hidden"
-                />
-                <div className="flex items-center gap-3">
-                  <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
-                    <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
-                    <input
-                      type="text"
-                      placeholder="Search for something"
-                      className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
-                    />
+                  </span>
+                  <h2 className="text-[#343c6a] font-[600] text-[0px] lg:text-[28px] hidden xl:block">
+                    Overview
+                  </h2>
+                  <CiMenuKebab
+                    onClick={() => setaside(!aside)}
+                    className="text-[35px] lg:hidden"
+                  />
+                  <div className="flex items-center gap-3">
+                    <div className="flex bg-[#f5f7fa] items-center gap-2 p-3 rounded-full">
+                      <IoSearchOutline className="text-[#a2a6b0] w-[30px] text-[20px]" />
+                      <input
+                        type="text"
+                        placeholder="Search for something"
+                        className="text-[8ba3cb] w-[100%] placeholder:text-[#00000058] outline-0"
+                      />
+                    </div>
+
+                    <Link href={"/AdminSetting"}>
+                      <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
+                    </Link>
+                    <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
+
+                    <div>
+                      <Image
+                        onClick={() => setshowProfile(!showProfile)}
+                        className="w-[40px] h-[40px]  rounded-full cursor-pointer"
+                        src={user}
+                        alt="You"
+                      />
+                    </div>
                   </div>
+                </nav>
 
-                  <Link href={"/AdminSetting"}>
-                    <IoSettingsOutline className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#00000058] " />
-                  </Link>
-                  <IoNotificationsSharp className="bg-[#f5f7fa] hidden md:block lg:block p-3 text-[45px] cursor-pointer rounded-full text-[#fe5c73] animate-pulse" />
-
-                  <div>
-                    <Image
-                      onClick={() => setshowProfile(!showProfile)}
-                      className="w-[40px] h-[40px]  rounded-full cursor-pointer"
-                      src={user}
-                      alt="You"
-                    />
-                  </div>
-                </div>
-              </nav>
-
-              {showProfile && <Adminshort />}
-            </header>
-          </div>
+                {showProfile && (
+                <Adminshort/>
+                )}
+              </header>
+            </div>
 
           <div className="xl:w-[70vw] w-[95vw] m-auto">
             <div className="py-10">

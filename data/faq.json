@@ -1,0 +1,29 @@
+{
+     "faq": [
+    {
+      "title": "How do I purchase a product?",
+      "discription":
+        "To buy a product on FarmForte, browse our categories, select the item you like, and click 'Add to Cart'. Proceed to checkout to complete payment securely. We ensure fast processing and safe delivery of all fresh produce directly from our farms."
+    },
+    {
+      "title": "Can I request a refund?",
+      "discription":
+        "Yes, FarmForte offers a hassle free refund policy. If your product is damaged or not as described, contact our support team within 7 days of delivery, and we will guide you through the refund process quickly and efficiently."
+    },
+    {
+      "title": "I'm a new user. How do I get started?",
+      "discription":
+        "Simply create an account on FarmForte, verify your email, and start exploring our fresh vegetables and fruits. Add items to your cart and enjoy a smooth checkout experience tailored for first time buyers."
+    },
+    {
+      "title": "What is your returns and refund policy?",
+      "discription":
+        "FarmForte accepts returns of spoiled or damaged products within 7 days. Ensure the product is in its original condition and contact our support team to initiate the return or refund process hassle-free."
+    },
+    {
+      "title": "Is my personal information secure?",
+      "discription":
+        "Yes, at FarmForte we prioritize your privacy. All personal data is securely stored and encrypted. Payments are processed through trusted gateways, keeping your details safe at all times."
+    }
+  ]
+}
